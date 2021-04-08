@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, 
+body { /* Formfelderüberschriften, Datum Startseite
+  Name Startseite, Status, Übersicht Rechnungszweck unter Id */
+  font-family: 'Spartan', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  background-color: #F8F8FB;
+}
+
+.body2 { /* Übersicht Adresse oben und unten,
+  Grand Total-Label */
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  letter-spacing: -0.23px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -1px;
+}
+
+h2 { /* Überschrift Startseite "Invoices", Überschrift Empty Startseite "There..." */
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 22.4px;
+  letter-spacing: -0.63px;
+}
+
+h3 { /* Geldbetrag */
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.8px;
+}
+
+h4 { /* Filter-Select, Id, Statusangabe,
+  Go back-Button, Label Itemnamen in View, Itemstückzahl und Betrag */
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}
+
+button {
+  border-radius: 24px;
+  font-weight: 700;
+}
+
+.invoice__data {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.31px;
+}
+
+.total-price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.42px;
+  text-align: right;
+}
+
+.form__heading {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+}
+
+.input-section__heading {
+  font-weight: 700;
+  color: #7C5DFA;
+}
+
+.item-list-section {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: -0.38px;
+}
