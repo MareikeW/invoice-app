@@ -16,7 +16,7 @@ function InvoiceCard(props) {
         return new Intl.DateTimeFormat('en-Gb', options).format(dateObj);
     }
 
-    function coloriseStatus(status) {
+    /*function coloriseStatus(status) {
         switch (status) {
             case "draft": 
                 return status.style.color = "#373B53";
@@ -27,7 +27,7 @@ function InvoiceCard(props) {
             default:
                 return status.style.color = "#fff";
         }
-    }
+    }*/
 
     return (
         <Container>

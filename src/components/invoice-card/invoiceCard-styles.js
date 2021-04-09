@@ -7,6 +7,8 @@ export const Container = styled.div`
     max-width: 327px;
     position: relative;
     margin-bottom: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
 `
 
 export const Id = styled.h4`

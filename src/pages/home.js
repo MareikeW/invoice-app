@@ -1,5 +1,5 @@
 import React from "react";
-//import Menu from "../components/Menu";
+import Menu from "../components/menu/Menu";
 import InvoiceCard from "../components/invoice-card/InvoiceCard";
 import invoicesData from "../data/data.json";
 
@@ -16,9 +16,10 @@ function Home() {
             />
         )
     })
+    
     return (
         <section>
-            
+            <Menu amountsOfInvoices={invoiceCardComponents.length}/>
             {invoiceCardComponents}
         </section>
     )
