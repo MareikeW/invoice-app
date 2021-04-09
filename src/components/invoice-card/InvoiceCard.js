@@ -1,15 +1,15 @@
 import React from "react";
 import {Container, Id, Name, DateInfo, Sum, Status} from "./invoiceCard-styles";
 
-function InvoiceCard() {
+function InvoiceCard(props) {
     return (
         <Container>
-            <Id>#RT3080</Id>
-            <Name>Jensen Huang</Name>
+            <Id>{props.id}</Id>
+            <Name>{props.clientName}</Name>
             <div>
-                <DateInfo>Due 19 Aug 2021</DateInfo>
-                <Sum>£ 1,800.90</Sum>
-                <Status>Paid</Status>
+                <DateInfo>Due {props.paymentDue}</DateInfo>
+                <Sum>£ {props.total}</Sum>
+                <Status>{props.status}</Status>
             </div>
         </Container>
     )
