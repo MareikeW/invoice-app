@@ -6,6 +6,7 @@ export const Container = styled.div`
     border-radius: 8px;
     max-width: 327px;
     position: relative;
+    margin-bottom: 16px;
 `
 
 export const Id = styled.h4`
@@ -39,4 +40,5 @@ export const Status = styled.h4`
     position: absolute;
     top: 79px;
     right: 50px;
+    text-transform: capitalize;
 `

@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-
+{/* 
           <Route exact path="/view-invoice">
             <ViewInvoice />
           </Route>
@@ -32,6 +32,8 @@ function App() {
           <Route exact path="/edit-invoice">
             <EditInvoice />
           </Route>
+
+          */}
         </Switch>
       </Router>
     </div>
