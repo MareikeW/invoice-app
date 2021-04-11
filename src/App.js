@@ -20,11 +20,11 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-{/* 
+
           <Route exact path="/view-invoice">
             <ViewInvoice />
           </Route>
-
+{/* 
           <Route exact path="/create-invoice">
             <CreateInvoice />
           </Route>

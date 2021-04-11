@@ -73,7 +73,6 @@ export const StyledCheckbox = styled.span`
 export const AddInvoiceButton = styled.button`
     width: 90px;
     height: 44px;
-    border: none;
     background-color: #7C5DFA;
     color: #ffffff;
     font-size: 12px;

@@ -57,6 +57,8 @@ button {
   border-radius: 24px;
   font-weight: 700;
   cursor: pointer;
+  font-family: 'Spartan', sans-serif;
+  border: none;
 }
 
 .invoice__data {
