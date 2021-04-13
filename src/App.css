@@ -25,6 +25,14 @@ body { /* Formfelderüberschriften, Datum Startseite
   letter-spacing: -0.23px;
 }
 
+
+h1,
+h2,
+h3,
+h4 {
+  color: #000000;
+}
+
 h1 {
   font-weight: 700;
   font-size: 32px;
