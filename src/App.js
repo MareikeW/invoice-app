@@ -10,9 +10,7 @@ import EditInvoice from "./pages/editInvoice";
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Link to="/">Home</Link>
-        <Link to="/view-invoice">View Invoice</Link>
+      <Router>  
         <Link to="/create-invoice">Create Invoice</Link>
         <Link to="/edit-invoice">Edit Invoice</Link>
 
@@ -22,6 +20,10 @@ function App() {
           </Route>
 
           <Route exact path="/view-invoice">
+            <ViewInvoice />
+          </Route>
+
+          <Route path="/view-invoice/:invoiceId">
             <ViewInvoice />
           </Route>
 {/* 
