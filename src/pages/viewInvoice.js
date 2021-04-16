@@ -16,6 +16,26 @@ function ViewInvoice() {
     
     const thisInvoice = invoicesData.find(invoice => invoice.id === invoiceId);
     
+    function getItems() {
+        for (let i = 0; i < invoicesData.length; i++) {
+            if(thisInvoice.id === invoiceId) {
+                return (
+                    <div>
+                     {thisInvoice.items.map((item) =>
+                            <div key={item.total}>
+                                <h4>{item.name}</h4>
+                                <p>{item.quantity} x £ {toCurrencyFormat(item.price)}</p>
+                                <p>£ {toCurrencyFormat(item.total)}</p>
+                            </div>
+                        )
+                    } 
+                    </div>
+                )
+            } else {
+                return null;
+            }
+        }
+    }
 
     return (
         <div>
@@ -59,11 +79,7 @@ function ViewInvoice() {
                 </InvoiceInformationContainer>
                 
                 <InvoiceTotalContainer>
-                    <div>
-                        <h4>{thisInvoice.items[0].name}</h4>
-                        <p>{thisInvoice.items[0].quantity} x {thisInvoice.itemPrice}</p>
-                        <p>£ {toCurrencyFormat(thisInvoice.items[0].total)}</p>
-                    </div>
+                    {getItems()}
 
                     <TotalPriceContainer>
                         <GrandTotalTerm>Grand Total</GrandTotalTerm>
