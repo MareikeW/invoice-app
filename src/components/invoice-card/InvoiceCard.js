@@ -1,20 +1,10 @@
 import React from "react";
+import { toReformattedDate, toCurrencyFormat } from "../../utils/utils.js";
 import {Container, Id, Name, DateInfo, Sum, Status} from "./invoiceCard-styles";
 
 function InvoiceCard(props) {
-    function toCurrencyFormat(total) {
-        return total.toLocaleString("en-GB", {minimumFractionDigits: 2});
-    }
+    
 
-    function toReformattedDate(date) {
-        const dateObj = new Date(date);
-        const options = {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-        return new Intl.DateTimeFormat('en-Gb', options).format(dateObj);
-    }
 
     /*function coloriseStatus(status) {
         switch (status) {
