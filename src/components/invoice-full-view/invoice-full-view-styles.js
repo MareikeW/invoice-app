@@ -66,8 +66,6 @@ export const TotalPriceContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    
 `
 
 export const GrandTotalTerm = styled.p`

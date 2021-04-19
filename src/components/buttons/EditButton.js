@@ -1,9 +1,9 @@
 import React from "react";
-import {EditBtn} from "./button-styles";
+import {StyledEditBtn} from "./button-styles";
 
-function EditButton() {
+const EditButton = () => {
     return (
-        <EditBtn>Edit</EditBtn>
+        <StyledEditBtn>Edit</StyledEditBtn>
     )
 }
 

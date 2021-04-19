@@ -2,7 +2,7 @@ import React from "react";
 import { toReformattedDate, toCurrencyFormat } from "../../utils/utils.js";
 import {Container, Id, Name, DateInfo, Sum, Status} from "./invoiceCard-styles";
 
-function InvoiceCard(props) {
+const InvoiceCard = ({id, clientName, paymentDue, total, status}) => {
     
 
 
@@ -21,12 +21,12 @@ function InvoiceCard(props) {
 
     return (
         <Container>
-            <Id>#{props.id}</Id>
-            <Name>{props.clientName}</Name>
+            <Id>#{id}</Id>
+            <Name>{clientName}</Name>
             <div>
-                <DateInfo>Due {toReformattedDate(props.paymentDue)}</DateInfo>
-                <Sum>£ {toCurrencyFormat(props.total)}</Sum>
-                <Status>{props.status}</Status>
+                <DateInfo>Due {toReformattedDate(paymentDue)}</DateInfo>
+                <Sum>£ {toCurrencyFormat(total)}</Sum>
+                <Status>{status}</Status>
             </div>
         </Container>
     )

@@ -4,7 +4,7 @@ import InvoiceCard from "../components/invoice-card/InvoiceCard";
 import invoicesData from "../data/data.json";
 import {Link} from "react-router-dom";
 
-function Home() {
+const Home = () => {
     const invoiceCardComponents = invoicesData.map(invoice => {
         return (
             <Link to={`/view-invoice/${invoice.id}`}>

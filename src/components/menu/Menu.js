@@ -4,12 +4,12 @@ import {MenuContainer, NumInvoices, FilterButton,
     AddInvoiceButton, PlusSign} from "./menu-styles.js";
 import {ReactComponent as Arrow} from "../../icons/icon-arrow-down.svg";
 import {ReactComponent as Plus} from "../../icons/icon-plus.svg";
-function Menu(props) {
+const Menu = ({amountsOfInvoices}) => {
     return (
         <MenuContainer>
             <div>
                 <h2>Invoices</h2>
-                <NumInvoices>{props.amountsOfInvoices} invoices</NumInvoices>
+                <NumInvoices>{amountsOfInvoices} invoices</NumInvoices>
             </div>
 
             <div>

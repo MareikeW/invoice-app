@@ -1,10 +1,10 @@
 import React from "react";
-import {GoBackBtn} from "./button-styles";
+import {StyledGoBackBtn} from "./button-styles";
 import {ReactComponent as Arrow} from "../../icons/icon-arrow-left.svg";
 
-function GoBackButton() {
+const GoBackButton = () => {
     return (
-        <GoBackBtn><Arrow /> Go back</GoBackBtn>
+        <StyledGoBackBtn><Arrow /> Go back</StyledGoBackBtn>
     )
 }
 

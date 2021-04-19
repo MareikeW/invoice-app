@@ -11,7 +11,7 @@ import {InvoiceViewContainer, IdNameAdressContainer,
     GrandTotalTerm } from "../components/invoice-full-view/invoice-full-view-styles.js";
     import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
 
-function ViewInvoice() {
+const ViewInvoice = () => {
     const {invoiceId} = useParams();
     
     const thisInvoice = invoicesData.find(invoice => invoice.id === invoiceId);

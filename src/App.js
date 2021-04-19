@@ -7,7 +7,7 @@ import ViewInvoice from "./pages/viewInvoice";
 import CreateInvoice from "./pages/createInvoice";
 import EditInvoice from "./pages/editInvoice";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Router>  

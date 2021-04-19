@@ -1,9 +1,9 @@
 import React from "react";
-import {MarkAsPaidBtn} from "./button-styles";
+import {StyledMarkAsPaidBtn} from "./button-styles";
 
-function MarkAsPaidButton() {
+const MarkAsPaidButton = () => {
     return (
-        <MarkAsPaidBtn>Mark as Paid</MarkAsPaidBtn>
+        <StyledMarkAsPaidBtn>Mark as Paid</StyledMarkAsPaidBtn>
     )
 }
 

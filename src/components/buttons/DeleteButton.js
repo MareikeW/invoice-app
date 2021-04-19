@@ -1,9 +1,9 @@
 import React from "react";
-import {DeleteBtn} from "./button-styles";
+import {StyledDeleteBtn} from "./button-styles";
 
-function DeleteButton() {
+const DeleteButton = () => {
     return (
-        <DeleteBtn>Delete</DeleteBtn>
+        <StyledDeleteBtn>Delete</StyledDeleteBtn>
     )
 }
 

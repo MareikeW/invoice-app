@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const GoBackBtn = styled.button`
+export const StyledGoBackBtn = styled.button`
     width: 81px;
     height: 15px;
     font-family: 12px;
@@ -10,21 +10,21 @@ export const GoBackBtn = styled.button`
     margin: 32px 24px;
 `
 
-export const EditBtn = styled.button`
+export const StyledEditBtn = styled.button`
     width: 73px;
     height: 48px;
     background-color: #F9FAFE;
     color: #7E88C3;
 `
 
-export const DeleteBtn = styled.button`
+export const StyledDeleteBtn = styled.button`
     width: 89px;
     height: 48px;
     background-color: #EC5757;
     color: #FFFFFF;
 `
 
-export const MarkAsPaidBtn = styled.button`
+export const StyledMarkAsPaidBtn = styled.button`
     width: 149px;
     height: 48px;
     background-color: #7C5DFA;
