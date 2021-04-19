@@ -4,8 +4,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 
 import Home from "./pages/home";
 import ViewInvoice from "./pages/viewInvoice";
-import CreateInvoice from "./pages/createInvoice";
-import EditInvoice from "./pages/editInvoice";
+
 
 const App = () => {
   return (
@@ -22,11 +21,11 @@ const App = () => {
           <Route exact path="/view-invoice">
             <ViewInvoice />
           </Route>
-
+{/*
           <Route path="/view-invoice/:invoiceId">
             <ViewInvoice />
           </Route>
-{/* 
+ 
           <Route exact path="/create-invoice">
             <CreateInvoice />
           </Route>

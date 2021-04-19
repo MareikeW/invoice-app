@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import invoiceData from "./data/data.json";
 
 const Context = React.createContext();
 
 const ContextProvider = (props) => {
-    const [invoices, setInvoiceData] = useState({});
+    const [invoices, setInvoiceData] = useState([]);
     
-    useEffect(() => {
-        fetch(invoiceData)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            setInvoiceData(data);
+    const getInvoiceData = () => {
+        fetch("data.json")
+        .then(function(response){
+            console.log(response);
+            return response.json();
         })
-    }, []);
+        .then(function(myJson) {
+            console.log(myJson);
+            setInvoiceData(myJson);
+        });
+    }
+
+    useEffect(() => {
+        getInvoiceData()
+    }, [])
 
     return (
         <Context.Provider value={{ invoices, setInvoiceData }}>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import GoBackButton from "../components/buttons/GoBackButton";
 import ViewInvoiceButtonCollection from "../components/button-collections/ViewInvoiceButtonCollection";
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
-import invoicesData from "../data/data.json";
+import {Context} from "../context";
 import {InvoiceViewContainer, IdNameAdressContainer, 
     InvoiceInformationContainer, InvoiceData,
     PaymentDue, BillTo, SentTo, InvoiceTotalContainer,
@@ -13,11 +13,12 @@ import {InvoiceViewContainer, IdNameAdressContainer,
 
 const ViewInvoice = () => {
     const {invoiceId} = useParams();
+    const context = useContext(Context);
     
-    const thisInvoice = invoicesData.find(invoice => invoice.id === invoiceId);
+    const thisInvoice = Object.keys(context.invoices).find(invoice => invoice.id === invoiceId);
     
     function getItems() {
-        for (let i = 0; i < invoicesData.length; i++) {
+        for (let i = 0; i < Object.keys(context.invoices).length; i++) {
             if(thisInvoice.id === invoiceId) {
                 return (
                     <div>

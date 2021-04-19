@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Menu from "../components/menu/Menu";
 import InvoiceCard from "../components/invoice-card/InvoiceCard";
-import invoicesData from "../data/data.json";
+import {Context} from "../context";
 import {Link} from "react-router-dom";
 
 const Home = () => {
-    const invoiceCardComponents = invoicesData.map(invoice => {
+    const context = useContext(Context);
+    const invoiceCardComponents = Object.keys(context.invoices).map(invoice => {
         return (
             <Link to={`/view-invoice/${invoice.id}`}>
                 <InvoiceCard 
