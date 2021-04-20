@@ -20,8 +20,8 @@ const ContextProvider = (props) => {
 
     useEffect(() => {
         getInvoiceData()
-    }, [])
-
+    }, []);
+    
     return (
         <Context.Provider value={{ invoices, setInvoiceData }}>
             {props.children}
