@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 
 import Home from "./pages/home";
 import ViewInvoice from "./pages/viewInvoice";
-
+import CreateInvoice from "./pages/createInvoice";
 
 const App = () => {
   return (
@@ -25,11 +25,11 @@ const App = () => {
           <Route path="/view-invoice/:invoiceId">
             <ViewInvoice />
           </Route>
- {/*
+
           <Route exact path="/create-invoice">
             <CreateInvoice />
           </Route>
-
+ {/*
           <Route exact path="/edit-invoice">
             <EditInvoice />
           </Route>

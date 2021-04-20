@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {MenuContainer, NumInvoices, FilterButton, 
     FilterOptions, FilterOption, FilterCheckbox, StyledCheckbox, 
     AddInvoiceButton, PlusSign} from "./menu-styles.js";
@@ -32,7 +33,7 @@ const Menu = ({amountsOfInvoices}) => {
                 </FilterOptions>    
             </div>
             
-            <AddInvoiceButton><PlusSign><Plus style={{position: "absolute", top: "10px", left: "10px"}}/></PlusSign> New</AddInvoiceButton>
+            <Link to="/create-invoice"><AddInvoiceButton><PlusSign><Plus style={{position: "absolute", top: "10px", left: "10px"}}/></PlusSign> New</AddInvoiceButton></Link>
         </MenuContainer>
     )
 }
