@@ -4,21 +4,23 @@ import ViewInvoiceButtonCollection from "../components/button-collections/ViewIn
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {Context} from "../context";
-import {InvoiceViewContainer, IdNameAdressContainer, 
-    InvoiceInformationContainer, InvoiceData,
+import {IdNameAdressContainer, InvoiceViewContainer, InvoiceInformationContainer, InvoiceData,
     PaymentDue, BillTo, SentTo, InvoiceTotalContainer,
     TotalPrice, StatusContainer, StatusWord, StatusName, BillToAddress, TotalPriceContainer,
-    GrandTotalTerm } from "../components/invoice-full-view/invoice-full-view-styles.js";
-    import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
+    GrandTotalTerm} from "../components/invoice-full-view/invoice-full-view-styles.js";
+import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
 
 const ViewInvoice = () => {
     const {invoiceId} = useParams();
-    const context = useContext(Context);
-    
-    const thisInvoice = Object.keys(context.invoices).find(invoice => invoice.id === invoiceId);
-    
+    const context = React.useContext(Context);
+  
+    // Sucht nach der Rechnung, die angezeigt werden soll
+    const thisInvoice = context.invoices.find(invoice => invoice.id === invoiceId);
+
+    // manchmal gibt es mehrere zu bezahlende Rechnungen
+    // Pro Produkt wird ein neuer Produktcontainer angelegt
     function getItems() {
-        for (let i = 0; i < Object.keys(context.invoices).length; i++) {
+        for (let i = 0; i < thisInvoice.length; i++) {
             if(thisInvoice.id === invoiceId) {
                 return (
                     <div>
@@ -39,20 +41,21 @@ const ViewInvoice = () => {
     }
 
     return (
+        
         <div>
             <Link to="/"><GoBackButton /></Link>
             <StatusContainer><StatusWord>Status</StatusWord><StatusName>{thisInvoice.status}</StatusName></StatusContainer>
             <InvoiceViewContainer className="body2">
                 <IdNameAdressContainer>
-                    <h4># {thisInvoice.id}</h4>
+                    <h4>{thisInvoice.id}</h4>
                     <p>{thisInvoice.description}</p>
                     <br />
                     <p>{thisInvoice.senderAddress.street}</p>
                     <p>{thisInvoice.senderAddress.city}</p>
                     <p>{thisInvoice.senderAddress.postCode}</p>
-                    <p>{thisInvoice.senderAddress.country}</p>
+                    <p>{thisInvoice.senderAddress.country}</p>  
                 </IdNameAdressContainer>
-
+            
                 <InvoiceInformationContainer>
                     <p>Invoice Date</p>
                     <InvoiceData>{toReformattedDate(thisInvoice.createdAt)}</InvoiceData>
@@ -80,7 +83,7 @@ const ViewInvoice = () => {
                 </InvoiceInformationContainer>
                 
                 <InvoiceTotalContainer>
-                    {getItems()}
+                  {getItems()}
 
                     <TotalPriceContainer>
                         <GrandTotalTerm>Grand Total</GrandTotalTerm>
@@ -88,7 +91,7 @@ const ViewInvoice = () => {
                     </TotalPriceContainer>
                 </InvoiceTotalContainer>
             </InvoiceViewContainer>
-            <ViewInvoiceButtonCollection />
+            <ViewInvoiceButtonCollection /> 
         </div>
     )
 }

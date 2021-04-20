@@ -1,6 +1,6 @@
 import React from "react";
 import { toReformattedDate, toCurrencyFormat } from "../../utils/utils.js";
-import {Container, Id, Name, DateInfo, Sum, Status} from "./invoiceCard-styles";
+import { Container, Id, Name, DateInfo, Sum, Status } from "./invoiceCard-styles";
 
 const InvoiceCard = ({id, clientName, paymentDue, total, status}) => {
     

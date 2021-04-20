@@ -21,11 +21,11 @@ const App = () => {
           <Route exact path="/view-invoice">
             <ViewInvoice />
           </Route>
-{/*
+
           <Route path="/view-invoice/:invoiceId">
             <ViewInvoice />
           </Route>
- 
+ {/*
           <Route exact path="/create-invoice">
             <CreateInvoice />
           </Route>
