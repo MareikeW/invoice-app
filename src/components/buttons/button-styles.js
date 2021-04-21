@@ -12,21 +12,36 @@ export const StyledGoBackBtn = styled.button`
 
 export const StyledEditBtn = styled.button`
     width: 73px;
-    height: 48px;
     background-color: #F9FAFE;
     color: #7E88C3;
 `
 
 export const StyledDeleteBtn = styled.button`
     width: 89px;
-    height: 48px;
     background-color: #EC5757;
     color: #FFFFFF;
 `
 
 export const StyledMarkAsPaidBtn = styled.button`
     width: 149px;
-    height: 48px;
+    background-color: #7C5DFA;
+    color: #FFFFFF;
+`
+
+export const StyledDiscardBtn = styled.button`
+    width: 84px;
+    background-color: #F9FAFE;
+    color: #7E88C3;
+`
+
+export const StyledDraftBtn = styled.button`
+    width: 117px;
+    background-color: #373B53;
+    color: #888EB0;
+`
+
+export const StyledSaveSendBtn = styled.button`
+    width: 112px;
     background-color: #7C5DFA;
     color: #FFFFFF;
 `

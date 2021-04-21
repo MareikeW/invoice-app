@@ -10,9 +10,6 @@ const App = () => {
   return (
     <div className="App">
       <Router>  
-        <Link to="/create-invoice">Create Invoice</Link>
-        <Link to="/edit-invoice">Edit Invoice</Link>
-
         <Switch>
           <Route exact path="/">
             <Home />

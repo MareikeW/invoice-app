@@ -41,7 +41,6 @@ const ViewInvoice = () => {
     }
 
     return (
-        
         <div>
             <Link to="/"><GoBackButton /></Link>
             <StatusContainer><StatusWord>Status</StatusWord><StatusName>{thisInvoice.status}</StatusName></StatusContainer>
