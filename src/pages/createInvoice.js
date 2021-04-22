@@ -2,7 +2,9 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import GoBackButton from "../components/buttons/GoBackButton";
 import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
-import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer } from "../components/form-components/form-styes";
+import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
+    QuantityInputField, PriceInputField, ItemTotalField, NewItemButton, PageBody } from "../components/form-components/form-styes";
+import {ReactComponent as DeleteItem} from "../icons/icon-delete.svg";
 
 /* Für jedes nested-Object in state eine eigene handle-Funktion, weil sonst nicht darauf zugegriffen werden kann. */
 const CreateInvoice = () => {  
@@ -97,6 +99,7 @@ const CreateInvoice = () => {
     //console.log(invoiceData);
 
     return (
+        <PageBody>
             <FormContainer className="body2">
                 <Link to="/"><GoBackButton /></Link>
                 <h1>New Invoice</h1>
@@ -121,7 +124,7 @@ const CreateInvoice = () => {
                         </FormFieldContainer>
 
                         <FormFieldContainer>
-                            <label className="countryLabel">Country</label>
+                            <label>Country</label>
                             <LongInputField type="text" name="country" value={invoiceData.senderAddress.country} onChange={handleChangeSenderAddress}/>
                         </FormFieldContainer>
                     </div>
@@ -144,11 +147,13 @@ const CreateInvoice = () => {
                         </FormFieldContainer>
 
                         <FormFieldContainer>
-                            <label>City</label>
-                            <ShortInputField type="text" name="city" value={invoiceData.clientAddress.city} onChange={handleChangeClientAddress}/>
+                            <div>
+                                <label className="cityLabel">City</label>
+                                <ShortInputField className="cityInput" type="text" name="city" value={invoiceData.clientAddress.city} onChange={handleChangeClientAddress}/>
 
-                            <label>Post Code</label>
-                            <ShortInputField type="text" name="postCode" value={invoiceData.clientAddress.postCode} onChange={handleChangeClientAddress}/>
+                                <label className="postCodeLabel">Post Code</label>
+                                <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoiceData.clientAddress.postCode} onChange={handleChangeClientAddress}/>
+                            </div>
                         </FormFieldContainer>
 
                         <FormFieldContainer>
@@ -184,23 +189,26 @@ const CreateInvoice = () => {
                         </FormFieldContainer>
 
                         <FormFieldContainer>
-                            <label>Qty.</label>
-                            <input type="number" name="quantity" value={invoiceData.items.quantity} onChange={handleChangeItems}/>
-                        
+                            <div>
+                                <label className="quantityLabel">Qty.</label>
+                                <QuantityInputField className="quantityInput" type="number" name="quantity" value={invoiceData.items.quantity} onChange={handleChangeItems}/>
 
+                                <label className="priceLabel">Price</label>
+                                <PriceInputField className="priceInput" type="number" name="price" value={invoiceData.items.price} onChange={handleChangeItems} />
 
-                        <label>Price</label>
-                        <input type="number" name="price" value={invoiceData.items.price} onChange={handleChangeItems}/>
+                                <label className="itemTotalLabel">Total</label>
+                                <ItemTotalField className="itemTotalInput" type="string" name="total" value={invoiceData.items.total} onChange={handleChangeItems} placeholder="400.00" readOnly/>
 
-                        <label>Total</label>
-                        <input type="number" name="total" value={invoiceData.items.total} onChange={handleChangeItems}/>
+                                <DeleteItem className="deleteItem">D</DeleteItem>
+                            </div>
                         </FormFieldContainer>
                     </div>
-                    <input type="button" value="+ add new item" />
+                    <NewItemButton>+ add new item</NewItemButton>
                     </FormAllFieldsContainer>
                     <CreateInvoiceButtonCollection />
                 </form>
             </FormContainer>
+        </PageBody>
     )
 }
 

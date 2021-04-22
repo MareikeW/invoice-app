@@ -1,8 +1,13 @@
 import styled from "styled-components";
 
+export const PageBody = styled.body`
+    background-color: #FFFFFF;
+`
+
 export const FormContainer = styled.div`
     color: #7E88C3;
     margin: 24px;
+    
     width: 327px;
 
     h1 {
@@ -12,7 +17,7 @@ export const FormContainer = styled.div`
     h3 {
         margin-bottom: 24px;
         margin-top: 66px;
-    }
+    }  
 `
 
 export const FormAllFieldsContainer = styled.div`
@@ -29,37 +34,79 @@ export const LongInputField = styled.input`
     margin-top: 10px;
 `
 
-export const ShortInputField = styled.input`
+export const ShortInputField = styled(LongInputField)`
     width: 152px;
-    margin-top: 10px;
+`
+export const QuantityInputField = styled(LongInputField)`
+    width: 64px;
+`
+
+export const PriceInputField = styled(LongInputField)`
+    width: 100px;
+`
+
+export const ItemTotalField = styled(LongInputField)`
+    width: 60px;
+    padding: 0;
+    border: none;
+    background-color: #F8F8FB;
+    color: #888EB0;
 `
 
 export const FormFieldContainer = styled.div`
     margin-top: 24px;
 
     div {
-        background-color: blue;
+        height: 73px;
+        width: 327px;
         position: relative;
         
-        .cityLabel {
+        .cityLabel,
+        .quantityLabel {
             position: absolute;
             top: 0;
         }
 
-        .cityInput {
+        .cityInput,
+        .quantityInput,
+        .postCodeInput,
+        .priceInput,
+        .itemTotalInput {
             position: absolute;
             top: 10px;
         }
 
-        .postCodeLabel {
-            position: absolute;
-            left: 176px;
-        }
-
+        .postCodeLabel,
         .postCodeInput {
             position: absolute;
             left: 176px;
-            top: 10px;
+        }
+
+        .priceLabel,
+        .priceInput {
+            position: absolute;
+            left: 80px;
+        }
+
+        .itemTotalLabel,
+        .itemTotalInput {
+            position: absolute;
+            left: 196px;
+        }
+
+        .deleteItem {
+            position: absolute;
+            right: 5px;
+            bottom: 16px;
         }
     }
+`
+
+export const NewItemButton = styled.button`
+    width: 327px;
+    background-color: #F9FAFE;
+    color: #7E88C3;
+    text-transform: capitalize;
+    margin-top: 48px;
+    margin-bottom: 88px;
 `
