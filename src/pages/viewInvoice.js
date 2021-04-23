@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom";
 import {Context} from "../context";
 import {IdNameAdressContainer, InvoiceViewContainer, InvoiceInformationContainer, InvoiceData,
     PaymentDue, BillTo, SentTo, InvoiceTotalContainer,
-    TotalPrice, StatusContainer, StatusWord, StatusName, BillToAddress, TotalPriceContainer,
+    TotalPrice, StatusContainer, StatusWord, StatusName, StatusDot, BillToAddress, TotalPriceContainer,
     GrandTotalTerm} from "../components/invoice-full-view/invoice-full-view-styles.js";
 import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
 
@@ -43,7 +43,7 @@ const ViewInvoice = () => {
     return (
         <div>
             <Link to="/"><GoBackButton /></Link>
-            <StatusContainer><StatusWord>Status</StatusWord><StatusName>{thisInvoice.status}</StatusName></StatusContainer>
+            <StatusContainer><StatusWord>Status</StatusWord><StatusName status={thisInvoice.status}><StatusDot status={thisInvoice.status} />{thisInvoice.status}</StatusName></StatusContainer>
             <InvoiceViewContainer className="body2">
                 <IdNameAdressContainer>
                     <h4>{thisInvoice.id}</h4>

@@ -91,6 +91,7 @@ export const StatusContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 `
 
 export const StatusWord = styled.h4`
@@ -99,8 +100,46 @@ export const StatusWord = styled.h4`
     color: #7E88C3;
 `
 
-export const StatusName = styled.span`
+export const StatusName = styled.h4`
+    color: ${({status}) => {
+        if (status === "paid") return "#33D69F";
+        else if (status === "pending") return "#FF8F00";
+        else if (status === "draft") return "#373B53"
+        else return "#000000";
+    }};
+    position: absolute;
+    top: 24px;
+    bottom: 27px;
+    right: 24px;
     text-transform: capitalize;
-    margin-right: 48px;
-    color: #FF8F00;
+    border-radius: 6px;
+    background-color: ${({status}) => {
+        if (status === "paid") return "rgba(51,214,159,0.06)";
+        else if (status === "pending") return "rgba(255,143,0,0.06)";
+        else if (status === "draft") return "rgba(55,59,83,0.06)";
+    }};
+    padding: ${({status}) => {
+        if (status === "paid") return "13px 29px 12px 46px";
+        else if (status === "pending") return "13px 17px 12px 34px";
+        else if (status === "draft") return "13px 27px 12px 43px";
+    }};
+`
+
+export const StatusDot = styled.span`
+    height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background-color: ${({status}) => {
+            if (status === "paid") return "#33D69F";
+            else if (status === "pending") return "#FF8F00";
+            else if (status === "draft") return "#373B53"
+            else return "#000000";
+        }};
+        position: absolute;
+        left: ${({status}) => {
+            if (status === "paid") return "30px";
+            else if (status === "pending") return "18px";
+            else if (status === "draft") return "27px"
+        }};
+        top: 16px;
 `
