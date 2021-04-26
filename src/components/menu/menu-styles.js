@@ -52,10 +52,10 @@ export const FilterOption = styled.label`
 `
 
 export const FilterCheckbox = styled.input`
-    opacity: 0;
+    left: 0;
     position: absolute;
-    height: 0;
-    width: 0;
+    height: 18px;
+    width: 18px;
 `
 
 export const StyledCheckbox = styled.span`
