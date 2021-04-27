@@ -1,18 +1,25 @@
 import React, {useState} from "react";
 //import Menu from "../components/menu/Menu";
 import InvoiceCard from "../components/invoice-card/InvoiceCard";
+import Header from "../components/shared/Header";
 import {Context} from "../context";
 import {Link} from "react-router-dom";
-import {MenuContainer, NumInvoices, FilterButton, 
+import {MenuContainer, FilterButton, 
     FilterOptions, FilterOption, FilterCheckbox, 
-    AddInvoiceButton, PlusSign} from "../components/menu/menu-styles";
+    AddInvoiceButton, PlusSign, ZeroInvoicesContainer} from "../components/menu/menu-styles";
 import {ReactComponent as Arrow} from "../icons/icon-arrow-down.svg";
 import {ReactComponent as Plus} from "../icons/icon-plus.svg";
+import {ReactComponent as ZeroInvoices} from "../icons/illustration-empty.svg";
+import {intViewportWidth} from "../utils/utils";
 
 const Home = () => {
     const context = React.useContext(Context);
-
     const [filterBox, setFilterBox] = useState([]);
+    
+    let filteredInvoices;
+    const filterOptions = document.getElementById("filterOptions");
+
+    
     const filterInvoices = (event) => {
         const {name} = event.target;
         
@@ -24,26 +31,36 @@ const Home = () => {
         })
     }
     
-    let filteredInvoices;
     if (filterBox.length) {
         filteredInvoices = context.invoices.filter(invoice => filterBox.includes(invoice.status));
     } else {
         filteredInvoices = context.invoices;
     }
+
+    const toggleFilterButton = (event) => {
+        event.preventDefault();
+        if (filterOptions.style.visibility === "visible") {
+            filterOptions.style.visibility = "hidden";
+        } else {
+            filterOptions.style.visibility = "visible";
+        }  
+    }
+
     
     return (
         <section>
+            <Header />
             <MenuContainer>
                 <div>
                     <h2>Invoices</h2>
-                    <NumInvoices>{filteredInvoices.length} invoices</NumInvoices>
+                    {intViewportWidth < 675 ? <p>{filteredInvoices.length} invoices</p> : <p>There are a total of {filteredInvoices.length} invoices</p>} 
                 </div>
 
                 <form>
-                    <FilterButton>Filter
+                    <FilterButton onClick={toggleFilterButton}>{intViewportWidth < 675 ? "Filter" : "Filter by status"}
                     <Arrow />
                     </FilterButton>
-                    <FilterOptions>
+                    <FilterOptions id="filterOptions">
                         <FilterOption>Draft
                             <FilterCheckbox 
                                 type="checkbox"
@@ -71,9 +88,22 @@ const Home = () => {
                     </FilterOptions>    
                 </form>
             
-                <Link to="/create-invoice"><AddInvoiceButton><PlusSign><Plus style={{position: "absolute", top: "10px", left: "10px"}}/></PlusSign> New</AddInvoiceButton></Link>
+                <Link to="/create-invoice">
+                    <AddInvoiceButton>
+                        <PlusSign>
+                            <Plus style={{position: "absolute", top: "10px", left: "10px"}}/>
+                        </PlusSign> {intViewportWidth < 675 ? "New" : "New Invoice"}
+                    </AddInvoiceButton>
+                </Link>
             </MenuContainer>
-            {filteredInvoices.map(invoice => {
+            {filteredInvoices.length < 1 ? 
+            <ZeroInvoicesContainer>
+                <ZeroInvoices />
+                <h2>There is nothing here</h2>
+                <p>Create an invoice by clicking the <strong>New</strong> button and get started</p>
+            </ZeroInvoicesContainer>
+            :
+            filteredInvoices.map(invoice => {
                 return (
                         <Link to={`/view-invoice/${invoice.id}`}>
                             <InvoiceCard 
@@ -86,7 +116,9 @@ const Home = () => {
                             />
                         </Link>
                 )
-            })}
+            })
+
+        }
         </section>
     )
 }

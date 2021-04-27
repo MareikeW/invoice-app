@@ -4,7 +4,7 @@ const Context = React.createContext();
 
 const ContextProvider = (props) => {
     const [invoices, setInvoiceData] = useState([]);
-    
+
     const getInvoiceData = () => {
         fetch("../data.json")
         .then(function(response){

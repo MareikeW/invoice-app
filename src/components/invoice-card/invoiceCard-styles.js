@@ -4,17 +4,38 @@ export const Container = styled.div`
     height: 134px;
     background-color: #fff;
     border-radius: 8px;
-    max-width: 327px;
+    min-width: 327px;
     position: relative;
     margin-bottom: 16px;
     margin-left: 24px;
     margin-right: 24px;
+
+    .arrowRight {
+        display: none;
+    }
+
+    @media (min-width: 675px) {
+        width: 672px;
+        margin: 0 auto 16px auto;
+        height: 72px;
+
+        .arrowRight {
+            display: block;
+            position: absolute;
+            right: 24px;
+            top: 32px;
+        }
+    }
 `
 
 export const Id = styled.h4`
     position: absolute;
     top: 24px;
     left: 24px;
+
+    @media (min-width: 675px) {
+        top: 29px;
+    }
 `
 
 export const Name = styled.p`
@@ -22,6 +43,11 @@ export const Name = styled.p`
     position: absolute;
     top: 24px;
     right: 24px;
+
+    @media (min-width: 675px) {
+        top: 29px;
+        left: 254px;
+    }
 `
 
 export const DateInfo = styled.p`
@@ -29,12 +55,22 @@ export const DateInfo = styled.p`
     position: absolute;
     top: 63px;
     left: 24px;
+
+    @media (min-width: 675px) {
+        top: 29px;
+        left: 111px;
+    }
 `
 
 export const Sum = styled.h3`
     position: absolute;
     bottom: 24px;
     left: 24px;
+
+    @media (min-width: 675px) {
+        top: 29px;
+        left: 390px;
+    }
 `
 
 export const Status = styled.h4`
@@ -59,6 +95,12 @@ export const Status = styled.h4`
         else if (status === "pending") return "13px 17px 12px 34px";
         else if (status === "draft") return "13px 27px 12px 43px";
     }};
+
+    @media (min-width: 675px) {
+        top: 16px;
+        left: 520px;
+        right: 48px;
+    }
 `
 
 export const StatusDot = styled.span`

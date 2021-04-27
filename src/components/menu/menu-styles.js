@@ -2,17 +2,32 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
     height: 44px;
-    max-width: 327px;
+    min-width: 327px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 32px 0;
-    margin-left: 24px;
-    margin-right: 24px;
-`
+    margin: 32px auto;
+    padding-left: 24px;
+    padding-right: 24px;
 
-export const NumInvoices = styled.p`
-    color: #888EB0;
+    p {
+        color: #888EB0;
+    }
+
+    @media (min-width: 675px) {
+        width: 672px;
+        padding: 0;
+        height: 59px;
+        margin-top: 56px;
+
+        h2 {
+            font-size: 32px;
+        }
+
+        p {
+            margin-top: 8px;
+        }
+    }
 `
 
 export const FilterButton = styled.button`
@@ -26,6 +41,11 @@ export const FilterButton = styled.button`
     align-items: center;
     margin: 0 auto;
     position: relative;
+    margin-left: 30px;
+
+    @media (min-width: 675px) {
+        width: 118px;
+    }
 `
 
 export const FilterOptions = styled.div`
@@ -37,10 +57,11 @@ export const FilterOptions = styled.div`
     border-radius: 8px;
     box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
     position: absolute;
-    top: 88px;
+    top: 150px;
     padding-left: 10px;
     padding-top: 10px;
     z-index: 1;
+    visibility: hidden;
 `
 
 export const FilterOption = styled.label`
@@ -58,18 +79,6 @@ export const FilterCheckbox = styled.input`
     width: 18px;
 `
 
-export const StyledCheckbox = styled.span`
-    position: absolute;
-    height: 16px;
-    width: 16px;
-    background-color: DFE3FA;
-    border: 1px solid #7C5DFA;
-    border-radius: 2px;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-`
-
 export const AddInvoiceButton = styled.button`
     width: 90px;
     height: 44px;
@@ -80,6 +89,11 @@ export const AddInvoiceButton = styled.button`
     position: relative;
     text-align: center;
     padding-left: 26px;
+
+    @media (min-width: 675px) {
+        width: 150px;
+        height: 48px;
+    }
 `
 
 export const PlusSign = styled.span`
@@ -91,4 +105,22 @@ export const PlusSign = styled.span`
     position: absolute;
     top: 6px;
     left: 6px;
+
+    @media (min-width: 675px) {
+        top: 8px;
+        left: 8px;
+    }
+`
+
+export const ZeroInvoicesContainer = styled.div`
+    margin: 102px auto 0 auto; 
+    width: 217px;
+    height: 277px;
+    text-align: center;
+
+
+    p {
+        color: #888EB0;
+        margin-top: 24px;
+    }
 `
