@@ -10,7 +10,6 @@ import {MenuContainer, FilterButton,
 import {ReactComponent as Arrow} from "../icons/icon-arrow-down.svg";
 import {ReactComponent as Plus} from "../icons/icon-plus.svg";
 import {ReactComponent as ZeroInvoices} from "../icons/illustration-empty.svg";
-import {screenWidth675} from "../utils/utils";
 
 const Home = () => {
     const context = React.useContext(Context);

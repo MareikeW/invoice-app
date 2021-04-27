@@ -4,6 +4,7 @@ import ViewInvoiceButtonCollection from "../components/button-collections/ViewIn
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {Context} from "../context";
+import Header from "../components/shared/Header";
 import {IdNameAdressContainer, InvoiceViewContainer, InvoiceInformationContainer, InvoiceData,
     PaymentDue, BillTo, SentTo, InvoiceTotalContainer,
     TotalPrice, StatusContainer, StatusWord, StatusName, StatusDot, BillToAddress, TotalPriceContainer,
@@ -40,8 +41,10 @@ const ViewInvoice = () => {
         }
     }
 
+
     return (
         <div>
+            <Header />
             <Link to="/"><GoBackButton /></Link>
             <StatusContainer><StatusWord>Status</StatusWord><StatusName status={thisInvoice.status}><StatusDot status={thisInvoice.status} />{thisInvoice.status}</StatusName></StatusContainer>
             <InvoiceViewContainer className="body2">

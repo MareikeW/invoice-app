@@ -124,7 +124,7 @@ ul {
   display: none;
 }
 
-@media (min-width: 675px) {
+@media (min-width: 700px) {
   .mobileVersion {
     display: none;
   }

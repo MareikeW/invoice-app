@@ -14,7 +14,7 @@ export const MenuContainer = styled.div`
         color: #888EB0;
     }
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         width: 672px;
         padding: 0;
         height: 59px;
@@ -27,6 +27,10 @@ export const MenuContainer = styled.div`
         p {
             margin-top: 8px;
         }
+    }
+
+    @media (min-width: 1024px) {
+        width: 730px;
     }
 `
 
@@ -43,8 +47,9 @@ export const FilterButton = styled.button`
     position: relative;
     margin-left: 30px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         width: 118px;
+        margin-left: 150px;
     }
 `
 
@@ -62,6 +67,19 @@ export const FilterOptions = styled.div`
     padding-top: 10px;
     z-index: 1;
     visibility: hidden;
+
+    @media (min-width: 700px) {
+        top: 180px;
+        margin-left: 150px;
+        width: 120px;
+    }
+
+    @media (min-width: 1024px) {
+        top: 190px;
+        margin-left: 120px;
+        width: 192px;
+        padding-left: 24px;
+    }
 `
 
 export const FilterOption = styled.label`
@@ -70,6 +88,10 @@ export const FilterOption = styled.label`
     position: relative;
     padding-left: 20px;
     margin-bottom: 8px;
+
+    @media (min-width: 700px) {
+        padding-left: 30px;
+    }
 `
 
 export const FilterCheckbox = styled.input`
@@ -90,7 +112,7 @@ export const AddInvoiceButton = styled.button`
     text-align: center;
     padding-left: 26px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         width: 150px;
         height: 48px;
     }
@@ -106,7 +128,7 @@ export const PlusSign = styled.span`
     top: 6px;
     left: 6px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         top: 8px;
         left: 8px;
     }

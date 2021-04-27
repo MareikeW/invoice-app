@@ -14,7 +14,7 @@ export const Container = styled.div`
         display: none;
     }
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         width: 672px;
         margin: 0 auto 16px auto;
         height: 72px;
@@ -26,6 +26,10 @@ export const Container = styled.div`
             top: 32px;
         }
     }
+
+    @media (min-width: 1024px) {
+        width: 730px;
+    }
 `
 
 export const Id = styled.h4`
@@ -33,8 +37,12 @@ export const Id = styled.h4`
     top: 24px;
     left: 24px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         top: 29px;
+    }
+
+    @media (min-width: 1024px) {
+        left: 32px;
     }
 `
 
@@ -44,9 +52,13 @@ export const Name = styled.p`
     top: 24px;
     right: 24px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         top: 29px;
         left: 254px;
+    }
+
+    @media (min-width: 1024px) {
+        left: 286px;
     }
 `
 
@@ -56,21 +68,36 @@ export const DateInfo = styled.p`
     top: 63px;
     left: 24px;
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         top: 29px;
         left: 111px;
+    }
+
+    @media (min-width: 1024px) {
+        left: 135px;
+    }
+`
+
+export const SumContainer = styled.div`
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    
+    @media (min-width: 700px) {
+        top: 29px;
+        left: 381px;
+        width: 100px;
+    }
+
+    @media (min-width: 1024px) {
+        left: 447px;
     }
 `
 
 export const Sum = styled.h3`
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-
-    @media (min-width: 675px) {
-        top: 29px;
-        left: 390px;
-    }
+    @media (min-width: 700px) {
+        text-align: right;
+    } 
 `
 
 export const Status = styled.h4`
@@ -96,10 +123,14 @@ export const Status = styled.h4`
         else if (status === "draft") return "13px 27px 12px 43px";
     }};
 
-    @media (min-width: 675px) {
+    @media (min-width: 700px) {
         top: 16px;
         left: 520px;
         right: 48px;
+    }
+
+    @media (min-width: 1024px) {
+        left: 578px;
     }
 `
 
