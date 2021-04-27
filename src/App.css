@@ -115,3 +115,21 @@ input, select {
 ul {
   list-style: none;
 }
+
+.mobileVersion {
+  display: block;
+}
+
+.tabletVersion {
+  display: none;
+}
+
+@media (min-width: 675px) {
+  .mobileVersion {
+    display: none;
+  }
+
+  .tabletVersion {
+    display: block;
+  }
+}

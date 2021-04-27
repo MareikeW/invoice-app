@@ -3,7 +3,6 @@ import {StyledHeader, LogoContainer, ThemeImageContainer, ImageContainer, Profil
 import {ReactComponent as Logo} from "../../icons/logo.svg";
 import {ReactComponent as Moon} from "../../icons/icon-moon.svg";
 import profileAvatar from "../../icons/image-avatar.jpg";
-import {intViewportWidth} from "../../utils/utils";
 
 const Header = () => {
     return (
@@ -12,7 +11,8 @@ const Header = () => {
                 <Logo style={{marginRight: "5px"}}/>
             </LogoContainer>
             <ThemeImageContainer>
-                <Moon style={intViewportWidth < 675 ? { marginTop: "26px", cursor: "pointer"} : { marginTop: "30px", marginRight: "30px", width: "20px"}}/>
+                <Moon className="mobileVersion" style={{ marginTop: "26px", cursor: "pointer"}}/>
+                <Moon className="tabletVersion" style={{ marginTop: "30px", marginRight: "30px", width: "20px"}}/>
                 <ImageContainer>
                     <ProfileAvatar src={profileAvatar} alt="profile avatar" />
                 </ImageContainer>

@@ -118,7 +118,6 @@ export const ZeroInvoicesContainer = styled.div`
     height: 277px;
     text-align: center;
 
-
     p {
         color: #888EB0;
         margin-top: 24px;
