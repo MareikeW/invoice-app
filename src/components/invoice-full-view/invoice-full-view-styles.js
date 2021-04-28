@@ -1,5 +1,27 @@
 import styled from "styled-components";
 
+export const ViewInvoicePageContainer = styled.div`
+    .statusMobileVersion {
+        display: block;
+    }
+
+    .statusTabletVersion {
+        display: none
+    }
+
+    @media (min-width: 720px) {
+        .statusMobileVersion {
+            display: none;
+        }
+
+        .statusTabletVersion {
+            display: block;
+            width: 688px;
+            height: 88px;
+        }
+    }
+`
+
 export const InvoiceViewContainer = styled.div`
     background-color: #FFFFFF;
     width: 327px;
@@ -64,6 +86,7 @@ export const InvoiceData = styled.h3`
 export const PaymentDue = styled.div`
     position: absolute;
     top: 79px;
+    width: 200px;
 `
 
 export const BillTo = styled.div`
@@ -72,8 +95,8 @@ export const BillTo = styled.div`
     top: 0px;
 
     @media (min-width: 720px) {
-        left: 228px;
-        width: 130px;
+        left: 196px;
+        width: 150px;
     }
 `
 
@@ -91,7 +114,8 @@ export const SentTo = styled.div`
 
     @media (min-width: 720px) {
         top: 0;
-        left: 431px;
+        left: 399px;
+        width: 200px;
     }
 `
 
@@ -114,7 +138,7 @@ export const InvoiceTotalContainerHeadings = styled.div`
         display: block;
         position: relative;
         padding: 32px;
-        padding-bottom: 0;
+        padding-bottom: 18px;
         font-size: 11px;
     }
 `
@@ -125,19 +149,30 @@ export const HeadingItemName = styled.p`
 
 export const HeadingItemQuantity = styled.p`
     position: absolute;
+    left: 308px;
 `
 
 export const HeadingItemPrice = styled.p`
     position: absolute;
+    left: 426px;
 `
 
 export const HeadingItemTotal = styled.p`
     position: absolute;
+    left: 563px;
 `
 
 export const StyledItem = styled.div`
     padding: 24px;  
     position: relative;
+
+    .itemMobileVersion {
+        display: block;
+    }
+
+    .itemTabletVersion {
+        display: none;
+    }
 
     h4 {
         margin-bottom: 8px;
@@ -149,6 +184,38 @@ export const StyledItem = styled.div`
         top: 36px;
         color: #000000;
         font-weight: bold;
+    }
+
+    @media (min-width: 720px) {
+        padding: 32px;
+
+        h4 {
+            font-size: 12px;
+        }
+
+        .itemQuantity {
+            position: absolute;
+            top: 32px;
+            left: 318px;
+        }
+
+        .itemPrice {
+            position: absolute;
+            top: 32px;
+            right: 169px;
+        }
+
+        .itemTotal {
+            top: 32px;
+        }
+
+        .itemMobileVersion {
+            display: none;
+        }
+    
+        .itemTabletVersion {
+            display: block;
+        }
     }
 `
 
@@ -209,10 +276,24 @@ export const StatusContainer = styled.div`
     margin: 0 auto;
 `
 
+export const StatusButtons = styled.div`
+    width: 325px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 20px;
+    right: 32px;
+`
+
 export const StatusWord = styled.h4`
     margin-left: 24px;
     font-weight: 500;
     color: #7E88C3;
+    padding-top: 36px;
+
+    @media (min-width: 720px) {
+        margin-left: 32px;
+    }
 `
 
 export const StatusName = styled.h4`
@@ -238,6 +319,11 @@ export const StatusName = styled.h4`
         else if (status === "pending") return "13px 17px 12px 34px";
         else if (status === "draft") return "13px 27px 12px 43px";
     }};
+
+    @media (min-width: 720px) {
+        left: 87px;
+        right: 497px;
+    }
 `
 
 export const StatusDot = styled.span`

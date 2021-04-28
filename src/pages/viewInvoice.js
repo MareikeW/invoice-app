@@ -1,13 +1,16 @@
 import React from "react";
 import GoBackButton from "../components/buttons/GoBackButton";
+import EditButton from "../components/buttons/EditButton";
+import DeleteButton from "../components/buttons/DeleteButton";
+import MarkAsPaidButton from "../components/buttons/MarkAsPaidButton";
 import ViewInvoiceButtonCollection from "../components/button-collections/ViewInvoiceButtonCollection";
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {Context} from "../context";
 import Header from "../components/shared/Header";
-import {InvoiceViewContainer, InvoiceUpperContainer, Description, SenderAddress, InvoiceInformationContainer, InvoiceData,
+import {ViewInvoicePageContainer, InvoiceViewContainer, InvoiceUpperContainer, Description, SenderAddress, InvoiceInformationContainer, InvoiceData,
     PaymentDue, BillTo, SentTo, InvoiceTotalContainer, InvoiceTotalContainerHeadings, HeadingItemName, HeadingItemQuantity, HeadingItemPrice, HeadingItemTotal,
-    TotalPrice, StatusContainer, StatusWord, StatusName, StatusDot, BillToAddress, TotalPriceContainer,
+    TotalPrice, StatusContainer, StatusButtons, StatusWord, StatusName, StatusDot, BillToAddress, TotalPriceContainer,
     GrandTotalTerm, StyledItem} from "../components/invoice-full-view/invoice-full-view-styles.js";
 import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
 
@@ -19,10 +22,28 @@ const ViewInvoice = () => {
     const thisInvoice = context.invoices.find(invoice => invoice.id === invoiceId);
 
     return (
-        <div>
+        <ViewInvoicePageContainer>
             <Header />
             <Link to="/"><GoBackButton /></Link>
-            <StatusContainer><StatusWord>Status</StatusWord><StatusName status={thisInvoice.status}><StatusDot status={thisInvoice.status} />{thisInvoice.status}</StatusName></StatusContainer>
+            <StatusContainer className="statusMobileVersion">
+                <StatusWord>Status</StatusWord>
+                <StatusName status={thisInvoice.status}>
+                    <StatusDot status={thisInvoice.status} />{thisInvoice.status}
+                </StatusName>
+            </StatusContainer>
+
+            <StatusContainer className="statusTabletVersion">
+                <StatusWord>Status</StatusWord>
+                <StatusName status={thisInvoice.status}>
+                    <StatusDot status={thisInvoice.status} />{thisInvoice.status}
+                </StatusName>
+                <StatusButtons>
+                    <EditButton className="editButton" />
+                    <DeleteButton className="deleteButton" />
+                    <MarkAsPaidButton className="markAsPaidButton" />
+                </StatusButtons>
+            </StatusContainer>
+            
             <InvoiceViewContainer className="body2">
             <InvoiceUpperContainer>
                 <div>
@@ -73,9 +94,17 @@ const ViewInvoice = () => {
                 {/* Iteriert durch sämtliche Items, weil manchmal mehr als ein Item in der Liste steht */}
                 {thisInvoice.items.map(item => (
                         <StyledItem key={item.total}>
-                            <h4>{item.name}</h4>
-                            <p>{item.quantity} x £ {toCurrencyFormat(item.price)}</p>
-                            <p className="itemTotal">£ {toCurrencyFormat(item.total)}</p>
+                            <div className="itemMobileVersion">
+                                <h4>{item.name}</h4>
+                                <p>{item.quantity} x £ {toCurrencyFormat(item.price)}</p>
+                                <p className="itemTotal">£ {toCurrencyFormat(item.total)}</p>
+                            </div>
+                            <div className="itemTabletVersion">
+                                <h4>{item.name}</h4>
+                                <p className="itemQuantity">{item.quantity}</p>
+                                <p className="itemPrice">£ {toCurrencyFormat(item.price)}</p>
+                                <p className="itemTotal">£ {toCurrencyFormat(item.total)}</p>
+                            </div>
                         </StyledItem>
                 ))}
                 
@@ -87,7 +116,7 @@ const ViewInvoice = () => {
                 </InvoiceTotalContainer>
             </InvoiceViewContainer>
             <ViewInvoiceButtonCollection /> 
-        </div>
+        </ViewInvoicePageContainer>
     )
 }
 
