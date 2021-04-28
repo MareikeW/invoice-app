@@ -25,6 +25,12 @@ body { /* Formfelderüberschriften, Datum Startseite
   letter-spacing: -0.23px;
 }
 
+@media (min-width: 720px) {
+  .body2 {
+    font-size: 12px;
+  }
+}
+
 h1,
 h2,
 h3,

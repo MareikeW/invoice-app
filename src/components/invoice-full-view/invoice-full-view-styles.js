@@ -7,18 +7,51 @@ export const InvoiceViewContainer = styled.div`
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
     color: #7E88C3;
     margin: 24px auto;
+    padding: 24px;
+
+    @media (min-width: 720px) {
+        width: 688px;
+        padding: 32px;
+        position: relative;
+
+        h4 {
+            font-size: 16px;
+        }
+    }
 `
 
-export const IdNameAdressContainer = styled.div`
-    padding-top: 24px;
-    padding-left: 24px;
+export const InvoiceUpperContainer = styled.div`
+    @media (min-width: 720px) {
+        height: 274px;
+    }
+`
+
+export const Description = styled.p`
+    @media (min-width: 720px) {
+        position: absolute;
+        top: 64px;
+    }
+`
+
+export const SenderAddress = styled.div`
+    @media (min-width: 720px) {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        text-align: right;
+        font-size: 11px;
+    }
 `
 
 export const InvoiceInformationContainer = styled.div`
     height: 209px;
     position: relative;
-    padding-left: 24px;
     margin-top: 31px;
+
+    @media (min-width: 720px) {
+        position: absolute;
+        top: 128px;
+    }
 `
 
 export const InvoiceData = styled.h3`
@@ -37,15 +70,29 @@ export const BillTo = styled.div`
     position: absolute;
     left: 160px;
     top: 0px;
+
+    @media (min-width: 720px) {
+        left: 228px;
+        width: 130px;
+    }
 `
 
 export const BillToAddress = styled.div`
     padding-top: 8px;
+
+    @media (min-width: 720px) {
+        font-size: 11px;
+    }
 `
 
 export const SentTo = styled.div`
     position: absolute;
     top: 162px;
+
+    @media (min-width: 720px) {
+        top: 0;
+        left: 431px;
+    }
 `
 
 export const InvoiceTotalContainer = styled.div`
@@ -54,6 +101,55 @@ export const InvoiceTotalContainer = styled.div`
     margin: 0 auto;
     margin-top: 40px;
     border-radius: 8px;
+
+    @media (min-width: 720px) {
+        width: 624px;
+    }
+`
+
+export const InvoiceTotalContainerHeadings = styled.div`
+    display: none;
+
+    @media (min-width: 720px) {
+        display: block;
+        position: relative;
+        padding: 32px;
+        padding-bottom: 0;
+        font-size: 11px;
+    }
+`
+
+export const HeadingItemName = styled.p`
+    position: absolute;
+`
+
+export const HeadingItemQuantity = styled.p`
+    position: absolute;
+`
+
+export const HeadingItemPrice = styled.p`
+    position: absolute;
+`
+
+export const HeadingItemTotal = styled.p`
+    position: absolute;
+`
+
+export const StyledItem = styled.div`
+    padding: 24px;  
+    position: relative;
+
+    h4 {
+        margin-bottom: 8px;
+    }
+
+    .itemTotal {
+        position: absolute;
+        right: 24px;
+        top: 36px;
+        color: #000000;
+        font-weight: bold;
+    }
 `
 
 export const TotalPriceContainer = styled.div`
@@ -70,6 +166,24 @@ export const TotalPriceContainer = styled.div`
 
 export const GrandTotalTerm = styled.p`
     padding-left: 24px;
+
+    .mobileVersion {
+        display: block;
+    }
+
+    .tabletVersion {
+        display: none;
+    }
+
+    @media (min-width: 720px) {
+        .mobileVersion {
+            display: none;
+        }
+    
+        .tabletVersion {
+            display: block;
+        } 
+    }
 `
  
 export const TotalPrice = styled.p`
@@ -92,6 +206,7 @@ export const StatusContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
+    margin: 0 auto;
 `
 
 export const StatusWord = styled.h4`

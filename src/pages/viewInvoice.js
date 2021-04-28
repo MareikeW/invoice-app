@@ -5,42 +5,18 @@ import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {Context} from "../context";
 import Header from "../components/shared/Header";
-import {IdNameAdressContainer, InvoiceViewContainer, InvoiceInformationContainer, InvoiceData,
-    PaymentDue, BillTo, SentTo, InvoiceTotalContainer,
+import {InvoiceViewContainer, InvoiceUpperContainer, Description, SenderAddress, InvoiceInformationContainer, InvoiceData,
+    PaymentDue, BillTo, SentTo, InvoiceTotalContainer, InvoiceTotalContainerHeadings, HeadingItemName, HeadingItemQuantity, HeadingItemPrice, HeadingItemTotal,
     TotalPrice, StatusContainer, StatusWord, StatusName, StatusDot, BillToAddress, TotalPriceContainer,
-    GrandTotalTerm} from "../components/invoice-full-view/invoice-full-view-styles.js";
+    GrandTotalTerm, StyledItem} from "../components/invoice-full-view/invoice-full-view-styles.js";
 import { toReformattedDate, toCurrencyFormat } from "../utils/utils.js";
 
 const ViewInvoice = () => {
     const {invoiceId} = useParams();
     const context = React.useContext(Context);
-  
+
     // Sucht nach der Rechnung, die angezeigt werden soll
     const thisInvoice = context.invoices.find(invoice => invoice.id === invoiceId);
-
-    // manchmal gibt es mehrere zu bezahlende Rechnungen
-    // Pro Produkt wird ein neuer Produktcontainer angelegt
-    function getItems() {
-        for (let i = 0; i < thisInvoice.length; i++) {
-            if(thisInvoice.id === invoiceId) {
-                return (
-                    <div>
-                     {thisInvoice.items.map((item) =>
-                            <div key={item.total}>
-                                <h4>{item.name}</h4>
-                                <p>{item.quantity} x £ {toCurrencyFormat(item.price)}</p>
-                                <p>£ {toCurrencyFormat(item.total)}</p>
-                            </div>
-                        )
-                    } 
-                    </div>
-                )
-            } else {
-                return null;
-            }
-        }
-    }
-
 
     return (
         <div>
@@ -48,15 +24,18 @@ const ViewInvoice = () => {
             <Link to="/"><GoBackButton /></Link>
             <StatusContainer><StatusWord>Status</StatusWord><StatusName status={thisInvoice.status}><StatusDot status={thisInvoice.status} />{thisInvoice.status}</StatusName></StatusContainer>
             <InvoiceViewContainer className="body2">
-                <IdNameAdressContainer>
-                    <h4>{thisInvoice.id}</h4>
-                    <p>{thisInvoice.description}</p>
+            <InvoiceUpperContainer>
+                <div>
+                    <h4>#{thisInvoice.id}</h4>
+                    <Description>{thisInvoice.description}</Description>
                     <br />
-                    <p>{thisInvoice.senderAddress.street}</p>
-                    <p>{thisInvoice.senderAddress.city}</p>
-                    <p>{thisInvoice.senderAddress.postCode}</p>
-                    <p>{thisInvoice.senderAddress.country}</p>  
-                </IdNameAdressContainer>
+                    <SenderAddress>
+                        <p>{thisInvoice.senderAddress.street}</p>
+                        <p>{thisInvoice.senderAddress.city}</p>
+                        <p>{thisInvoice.senderAddress.postCode}</p>
+                        <p>{thisInvoice.senderAddress.country}</p> 
+                    </SenderAddress> 
+                </div>
             
                 <InvoiceInformationContainer>
                     <p>Invoice Date</p>
@@ -83,12 +62,26 @@ const ViewInvoice = () => {
                         <InvoiceData>{thisInvoice.clientEmail}</InvoiceData>
                     </SentTo>
                 </InvoiceInformationContainer>
-                
+                </InvoiceUpperContainer>
                 <InvoiceTotalContainer>
-                  {getItems()}
-
+                <InvoiceTotalContainerHeadings>
+                    <HeadingItemName>Item Name</HeadingItemName>
+                    <HeadingItemQuantity>QTY.</HeadingItemQuantity>
+                    <HeadingItemPrice>Price</HeadingItemPrice>
+                    <HeadingItemTotal>Total</HeadingItemTotal>
+                </InvoiceTotalContainerHeadings>
+                {/* Iteriert durch sämtliche Items, weil manchmal mehr als ein Item in der Liste steht */}
+                {thisInvoice.items.map(item => (
+                        <StyledItem key={item.total}>
+                            <h4>{item.name}</h4>
+                            <p>{item.quantity} x £ {toCurrencyFormat(item.price)}</p>
+                            <p className="itemTotal">£ {toCurrencyFormat(item.total)}</p>
+                        </StyledItem>
+                ))}
+                
                     <TotalPriceContainer>
-                        <GrandTotalTerm>Grand Total</GrandTotalTerm>
+                        <GrandTotalTerm className="mobileVersion">Grand Total</GrandTotalTerm>
+                        <GrandTotalTerm className="tabletVersion">Amount Due</GrandTotalTerm>
                         <TotalPrice>£ {toCurrencyFormat(thisInvoice.total)}</TotalPrice>
                     </TotalPriceContainer>
                 </InvoiceTotalContainer>

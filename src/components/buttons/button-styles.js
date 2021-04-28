@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const GoBackButtonContainer = styled.div`
+    margin: 0 auto;
+    width: 327px;
+`
+
 export const StyledGoBackBtn = styled.button`
     width: 81px;
     height: 15px;
@@ -8,6 +13,7 @@ export const StyledGoBackBtn = styled.button`
     display: flex;
     justify-content: space-between;
     margin: 32px 24px;
+    margin-left: 0;
 `
 
 export const StyledEditBtn = styled.button`
