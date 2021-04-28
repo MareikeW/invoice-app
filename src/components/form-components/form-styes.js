@@ -2,11 +2,15 @@ import styled from "styled-components";
 
 export const PageBody = styled.body`
     background-color: #FFFFFF;
+
+    .goBackButton {
+        margin-left: 52px;
+    }
 `
 
 export const FormContainer = styled.div`
     color: #7E88C3;
-    margin: 24px;
+    margin: 0 auto;
     
     width: 327px;
 
@@ -45,16 +49,23 @@ export const PriceInputField = styled(LongInputField)`
     width: 100px;
 `
 
-export const ItemTotalField = styled(LongInputField)`
+export const ItemTotalField = styled.label`
+    margin-top: 28px;
     width: 60px;
     padding: 0;
-    border: none;
-    background-color: #F8F8FB;
+    cursor: unset;
     color: #888EB0;
 `
 
 export const FormFieldContainer = styled.div`
     margin-top: 24px;
+
+    select {
+        margin-top: 10px;
+        width: 327px;
+        padding: 0;
+        padding-left: 20px;
+    }
 
     div {
         height: 73px;

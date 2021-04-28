@@ -115,7 +115,9 @@ const ViewInvoice = () => {
                     </TotalPriceContainer>
                 </InvoiceTotalContainer>
             </InvoiceViewContainer>
-            <ViewInvoiceButtonCollection /> 
+            <div className="viewInvoiceButtonCollectionMobile">
+                <ViewInvoiceButtonCollection /> 
+            </div>
         </ViewInvoicePageContainer>
     )
 }

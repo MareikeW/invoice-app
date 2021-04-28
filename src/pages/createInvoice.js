@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
+import Header from "../components/shared/Header";
 import GoBackButton from "../components/buttons/GoBackButton";
 import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
 import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
     QuantityInputField, PriceInputField, ItemTotalField, NewItemButton, PageBody } from "../components/form-components/form-styes";
 import {ReactComponent as DeleteItem} from "../icons/icon-delete.svg";
+import {toCurrencyFormat} from "../utils/utils";
 
 /* Für jedes nested-Object in state eine eigene handle-Funktion, weil sonst nicht darauf zugegriffen werden kann. */
 const CreateInvoice = () => {  
@@ -90,18 +92,27 @@ const CreateInvoice = () => {
         })
     }
 
+    const handleChangeItemsTotal = (quantity, price) => {
+            let result = 0;
+            result = quantity * price;
+            return result.toLocaleString("en-GB", {minimumFractionDigits: 2});
+    }
+
     // Nach Klick auf den Button wird ein alert-Fenster geöffnet.
     const handleSubmit = event => {
         event.preventDefault();
         alert(`New Invoice was added.`);
     }
 
-    //console.log(invoiceData);
+    console.log(invoiceData.items);
 
     return (
         <PageBody>
+        <Header />
+        <div className="goBackButton">
+            <Link to="/"><GoBackButton /></Link>
+        </div>
             <FormContainer className="body2">
-                <Link to="/"><GoBackButton /></Link>
                 <h1>New Invoice</h1>
                 <form onSubmit={handleSubmit}>
                     <FormAllFieldsContainer>
@@ -168,6 +179,7 @@ const CreateInvoice = () => {
 
                         <FormFieldContainer>
                             <label>Payment Terms</label>
+                            <br />
                             <select name="paymentTerms" value={invoiceData.paymentTerms} onChange={handleChange}>
                                 <option value="1">Net 1 Day</option>
                                 <option value="7">Net 7 Days</option>
@@ -191,23 +203,22 @@ const CreateInvoice = () => {
                         <FormFieldContainer>
                             <div>
                                 <label className="quantityLabel">Qty.</label>
-                                <QuantityInputField className="quantityInput" type="number" name="quantity" value={invoiceData.items.quantity} onChange={handleChangeItems}/>
+                                <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoiceData.items.quantity} onChange={handleChangeItems}/>
 
                                 <label className="priceLabel">Price</label>
-                                <PriceInputField className="priceInput" type="number" name="price" value={invoiceData.items.price} onChange={handleChangeItems} />
+                                <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoiceData.items.price} onChange={handleChangeItems} />
 
                                 <label className="itemTotalLabel">Total</label>
-                                <ItemTotalField className="itemTotalInput" type="string" name="total" value={invoiceData.items.total} onChange={handleChangeItems} placeholder="400.00" readOnly/>
+                                <ItemTotalField className="itemTotalInput" name="total">{(invoiceData.items.quantity && invoiceData.items.price) === undefined ? "0" : handleChangeItemsTotal(invoiceData.items.quantity, invoiceData.items.price)}</ItemTotalField>
 
                                 <DeleteItem className="deleteItem">D</DeleteItem>
                             </div>
                         </FormFieldContainer>
                     </div>
-                    <NewItemButton>+ add new item</NewItemButton>
                     </FormAllFieldsContainer>
-                    <CreateInvoiceButtonCollection />
                 </form>
             </FormContainer>
+            <CreateInvoiceButtonCollection />
         </PageBody>
     )
 }

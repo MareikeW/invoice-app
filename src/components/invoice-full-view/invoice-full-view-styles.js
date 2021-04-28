@@ -19,6 +19,16 @@ export const ViewInvoicePageContainer = styled.div`
             width: 688px;
             height: 88px;
         }
+
+        .viewInvoiceButtonCollectionMobile {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .statusTabletVersion {
+            width: 730px;
+        }
     }
 `
 
@@ -40,6 +50,11 @@ export const InvoiceViewContainer = styled.div`
             font-size: 16px;
         }
     }
+
+    @media (min-width: 1024px) {
+        width: 730px;
+        padding: 48px;
+    }
 `
 
 export const InvoiceUpperContainer = styled.div`
@@ -53,6 +68,11 @@ export const Description = styled.p`
         position: absolute;
         top: 64px;
     }
+
+    @media (min-width: 1024px) {
+        position: absolute;
+        top: 80px;
+    }
 `
 
 export const SenderAddress = styled.div`
@@ -62,6 +82,12 @@ export const SenderAddress = styled.div`
         top: 32px;
         text-align: right;
         font-size: 11px;
+    }
+
+    @media (min-width: 1024px) {
+        position: absolute;
+        right: 48px;
+        top: 48px;
     }
 `
 
@@ -277,7 +303,7 @@ export const StatusContainer = styled.div`
 `
 
 export const StatusButtons = styled.div`
-    width: 325px;
+    width: 309px;
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -323,6 +349,10 @@ export const StatusName = styled.h4`
     @media (min-width: 720px) {
         left: 87px;
         right: 497px;
+    }
+
+    @media (min-width: 1024px) {
+        right: 539px;
     }
 `
 

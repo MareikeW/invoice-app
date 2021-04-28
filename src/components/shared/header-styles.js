@@ -25,18 +25,6 @@ export const LogoContainer = styled.div`
     }
 `
 
-export const ThemeImageContainer = styled.div`
-    width: 112px;
-    height: 72px;
-    display: flex;
-    justify-content: space-between;
-
-    @media (min-width: 675px) {
-        height: 80px;
-        width: 146px;
-    }
-`
-
 export const ImageContainer = styled.div`
     height: 72px;
     width: 72px;
