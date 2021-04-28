@@ -6,7 +6,7 @@ export const InvoiceViewContainer = styled.div`
     border-radius: 8px;
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
     color: #7E88C3;
-    margin: 24px;
+    margin: 24px auto;
 `
 
 export const IdNameAdressContainer = styled.div`
