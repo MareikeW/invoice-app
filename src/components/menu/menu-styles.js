@@ -34,7 +34,7 @@ export const MenuContainer = styled.div`
     }
 `
 
-export const FilterButton = styled.button`
+export const StyledFilterButton = styled.button`
     border: none;
     background-color: unset;
     width: 54px;
@@ -101,7 +101,7 @@ export const FilterCheckbox = styled.input`
     width: 18px;
 `
 
-export const AddInvoiceButton = styled.button`
+export const StyledAddInvoiceButton = styled.button`
     width: 90px;
     height: 44px;
     background-color: #7C5DFA;

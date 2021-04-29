@@ -9,6 +9,13 @@ export const ViewInvoicePageContainer = styled.div`
         display: none
     }
 
+    .viewInvoiceButtonCollectionMobile {
+        display: flex;
+        background-color: #FFFFFF;
+        justify-content: space-between;
+        padding: 21px;
+    }
+
     @media (min-width: 720px) {
         .statusMobileVersion {
             display: none;
@@ -157,7 +164,7 @@ export const InvoiceTotalContainer = styled.div`
     }
 `
 
-export const InvoiceTotalContainerHeadings = styled.div`
+export const StyledInvoiceTotalContainerHeadings = styled.div`
     display: none;
 
     @media (min-width: 720px) {
@@ -279,7 +286,7 @@ export const GrandTotalTerm = styled.p`
     }
 `
  
-export const TotalPrice = styled.p`
+export const StyledTotalPrice = styled.p`
     font-weight: 700;
     font-size: 20px;
     line-height: 32px;

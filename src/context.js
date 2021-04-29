@@ -21,7 +21,7 @@ const ContextProvider = (props) => {
     }, []);
     
     return (
-        <Context.Provider value={{ invoices, setInvoiceData }}>
+        <Context.Provider value={{ invoices, setInvoiceData }} >
             {props.children}
         </Context.Provider>
     )

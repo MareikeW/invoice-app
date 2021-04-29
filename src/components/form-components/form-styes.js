@@ -109,15 +109,7 @@ export const FormFieldContainer = styled.div`
             position: absolute;
             right: 5px;
             bottom: 16px;
+            cursor: pointer;
         }
     }
-`
-
-export const NewItemButton = styled.button`
-    width: 327px;
-    background-color: #F9FAFE;
-    color: #7E88C3;
-    text-transform: capitalize;
-    margin-top: 48px;
-    margin-bottom: 88px;
 `
