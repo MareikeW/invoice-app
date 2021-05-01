@@ -1,6 +1,7 @@
+
 /* Invoices Data for firebase */
 export function seedDatabase(firebase) {
-
+    
     firebase.firestore().collection("invoices").add({
         id: "RT3080",
         createdAt: "2021-08-18",
@@ -30,7 +31,7 @@ export function seedDatabase(firebase) {
                 total: 1800.90
             }
             ],
-        total: 1800.90
+        total: 1800.90,
     });
     firebase.firestore().collection("invoices").add({ 
         id: "XM9141",
@@ -67,7 +68,7 @@ export function seedDatabase(firebase) {
                 total: 400.00
             }
             ],
-        total: 556.00
+        total: 556.00,
     });
     firebase.firestore().collection("invoices").add({ 
         id: "RG0314",
@@ -98,7 +99,7 @@ export function seedDatabase(firebase) {
                 total: 14002.33
             }
             ],
-        total: 14002.33
+        total: 14002.33,
     });
     firebase.firestore().collection("invoices").add({
         id: "RT2080",
@@ -129,7 +130,7 @@ export function seedDatabase(firebase) {
                 total: 102.04
             }
         ],
-        total: 102.04
+        total: 102.04,
     });
     firebase.firestore().collection("invoices").add({
         id: "AA1449",
@@ -166,7 +167,7 @@ export function seedDatabase(firebase) {
                 total: 2500.00
             }
         ],
-        total: 4032.33
+        total: 4032.33,
     });
     firebase.firestore().collection("invoices").add({
         id: "TY9141",
@@ -197,7 +198,7 @@ export function seedDatabase(firebase) {
                 total: 6155.91
             }
         ],
-        total: 6155.91
+        total: 6155.91,
     });
     firebase.firestore().collection("invoices").add({
         id: "FV2353",
@@ -228,6 +229,6 @@ export function seedDatabase(firebase) {
                 total: 3102.04
             }
         ],
-        total: 3102.04
+        total: 3102.04,
     });
 }

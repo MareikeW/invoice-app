@@ -7,8 +7,10 @@ import AddInvoiceButton from "../components/menu/AddInvoiceButton";
 import ZeroInvoices from "../components/invoice-card/ZeroInvoices";
 import Header from "../components/shared/Header";
 import {Context} from "../context";
+//import { FirebaseContext } from "../context/firebase";
 import {Link} from "react-router-dom";
 import {MenuContainer, FilterOptions, FilterOption, FilterCheckbox} from "../components/menu/menu-styles";
+
 
 const Home = () => {
     const context = React.useContext(Context);
