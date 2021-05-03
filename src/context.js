@@ -33,14 +33,37 @@ const ContextProvider = (props) => {
         setInvoiceData(prevInvoices => [...prevInvoices, newInvoice]);
     }
 
+    const addNewDraft = newDraft => {
+        newDraft.status = "draft";
+        newDraft.id = addNewId();
+        setInvoiceData(prevInvoices => [...prevInvoices, newDraft]);
+    }
+
     // Ändert den Status zu "paid"
     const setStatusToPaid = id => {
         const index = invoices.findIndex(invoice => invoice.id === id);
         invoices[index].status = "paid";
     }
+
+    // Fügt eine neugenerierte Id zur neuen Invoice hinzu
+    const addNewId = () => {
+        let ID = "";
+        let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let digits = "0123456789";
+
+        for ( let i = 0; i < 2; i++ ) {
+            ID += characters.charAt(Math.floor(Math.random() * 26));
+        }
+
+        for (let i = 0; i < 4; i++) {
+            ID += digits.charAt(Math.floor(Math.random() * 10))
+        }
+
+        return ID;
+    }
     
     return (
-        <Context.Provider value={{ invoices, setInvoiceData, clearInvoiceData, editInvoice, addNewInvoice, setStatusToPaid }} >
+        <Context.Provider value={{ invoices, setInvoiceData, clearInvoiceData, editInvoice, addNewInvoice, addNewDraft, setStatusToPaid }} >
             {props.children}
         </Context.Provider>
     )

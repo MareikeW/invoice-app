@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {Context} from "../context";
 import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
@@ -63,27 +63,27 @@ const CreateInvoice = () => {
         })
     }
 
-
     function addDays(createdAt, days) {
+        if (!createdAt || !days) return null;
         const date = new Date(createdAt);
-        date.setDate(date.getDate() + days);
-        //console.log(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDay() + days) );
-        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    }
-  
-    const setPaymentDue = createdAt => {
-        console.log("Created At: " + createdAt)
-        //const paymentDueValue = addDays(createdAt, 7);
-        console.log(addDays(createdAt, 30));
-        /*
-        const {paymentDue} = {...invoice}
-        setInvoice(prevInvoiceData => {
-            return {
-                ...prevInvoiceData,
-                paymentDue: paymentDueValue
-            }
-        });*/
-    }
+        console.log("days: " +  days)
+       
+        date.setDate(date.getDate() + Number(days));
+        return (
+          date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        );
+      }
+    
+      useEffect(() => {
+        setInvoice(prevInvoice => {
+          const date = addDays(prevInvoice.createdAt, prevInvoice.paymentTerms);
+    
+          return {
+            ...prevInvoice,
+            paymentDue: date
+          }
+        })
+      }, [invoice.paymentTerms])
 
     const handleChangeSenderAddress = event => {
         const {senderAddress} = {...invoice};
@@ -212,7 +212,7 @@ const CreateInvoice = () => {
                             <FormFieldContainer>
                                 <label>Payment Terms</label>
                                 <br />
-                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange} onClick={setPaymentDue(invoice.createdAt)}>
+                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange}>
                                     <option value="1">Net 1 Day</option>
                                     <option value="7">Net 7 Days</option>
                                     <option value="30">Net 30 Days</option>
@@ -248,12 +248,13 @@ const CreateInvoice = () => {
                             </FormFieldContainer>
                         </div>
                         </FormAllFieldsContainer>
-                        <Link to="/">
-                            <button onClick={() => context.addNewInvoice(invoice)}>Add Invoice</button>
-                        </Link>
                         
+                        <Link to="/">
+                            <button onClick={() => context.addNewDraft(invoice)}>Save As Draft</button>
+                        </Link>
                     </form>
                 </FormContainer>
+                
             <CreateInvoiceButtonCollection />
         </PageBody>
     )
