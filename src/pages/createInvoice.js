@@ -64,29 +64,26 @@ const CreateInvoice = () => {
     }
 
 
-    function formatDate(date) {
+    function addDays(createdAt, days) {
+        const date = new Date(createdAt);
+        date.setDate(date.getDate() + days);
+        //console.log(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDay() + days) );
         return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     }
-
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(date.getDate() + days);
-        return result;
-    }
-
-    const setPaymentDue = event => {
-        const {createdAt} = {...invoice};
-        const paymentDueValue = formatDate(addDays(createdAt, 7));
+  
+    const setPaymentDue = createdAt => {
+        console.log("Created At: " + createdAt)
+        //const paymentDueValue = addDays(createdAt, 7);
+        console.log(addDays(createdAt, 30));
+        /*
+        const {paymentDue} = {...invoice}
         setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
                 paymentDue: paymentDueValue
             }
-        })
+        });*/
     }
-    console.log(invoice.paymentDue)
-
-    
 
     const handleChangeSenderAddress = event => {
         const {senderAddress} = {...invoice};
@@ -215,10 +212,10 @@ const CreateInvoice = () => {
                             <FormFieldContainer>
                                 <label>Payment Terms</label>
                                 <br />
-                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange}>
-                                    <option value="1" onClick={setPaymentDue}>Net 1 Day</option>
-                                    <option value="7" onClick={setPaymentDue}>Net 7 Days</option>
-                                    <option value="30" onClick={setPaymentDue}>Net 30 Days</option>
+                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange} onClick={setPaymentDue(invoice.createdAt)}>
+                                    <option value="1">Net 1 Day</option>
+                                    <option value="7">Net 7 Days</option>
+                                    <option value="30">Net 30 Days</option>
                                 </select>
                             </FormFieldContainer>
 
