@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 //import Menu from "../components/menu/Menu";
 import InvoiceCard from "../components/invoice-card/InvoiceCard";
 import MenuInvoiceAmount from "../components/menu/MenuInvoiceAmount";
@@ -7,17 +7,17 @@ import AddInvoiceButton from "../components/menu/AddInvoiceButton";
 import ZeroInvoices from "../components/invoice-card/ZeroInvoices";
 import Header from "../components/shared/Header";
 import {Context} from "../context";
-//import { FirebaseContext } from "../context/firebase";
 import {Link} from "react-router-dom";
 import {MenuContainer, FilterOptions, FilterOption, FilterCheckbox} from "../components/menu/menu-styles";
 
 
 const Home = () => {
-    const context = React.useContext(Context);
+    const context = useContext(Context);
     const [filterBox, setFilterBox] = useState([]);
     
-    let filteredInvoices;
+    let filteredInvoices; // Für die Anzahl der Invoices, die im Menü angezeigt wird
     
+    // Filtert nach Status und zeigt dann die passenden Invoices an
     const filterInvoices = (event) => {
         const {name} = event.target;
         

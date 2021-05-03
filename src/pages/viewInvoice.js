@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import GoBackButton from "../components/buttons/GoBackButton";
 import EditButton from "../components/buttons/EditButton";
 import DeleteButton from "../components/buttons/DeleteButton";
@@ -18,7 +18,7 @@ import {ViewInvoicePageContainer, InvoiceViewContainer, InvoiceUpperContainer, I
 
 const ViewInvoice = () => {
     const {invoiceId} = useParams();
-    const context = React.useContext(Context);
+    const context = useContext(Context);
 
     // Sucht nach der Rechnung, die angezeigt werden soll
     const thisInvoice = context.invoices.find(invoice => invoice.id === invoiceId);
@@ -45,9 +45,16 @@ const ViewInvoice = () => {
                     <StatusDot status={status} />{status}
                 </StatusName>
                 <StatusButtons>
-                    <EditButton className="editButton" />
-                    <DeleteButton className="deleteButton" />
-                    <StyledMarkAsPaidBtn value="paid" onClick={setStatusToPaid}>Mark as Paid</StyledMarkAsPaidBtn>
+                    <Link to={`/edit-invoice/${thisInvoice.id}`}>
+                        <EditButton className="editButton" />
+                    </Link> 
+                    
+                    <Link to="/">
+                        <button className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</button>
+                    </Link>
+                    <Link to="/">
+                        <button value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</button>
+                    </Link>
                 </StatusButtons>
             </StatusContainer>
             

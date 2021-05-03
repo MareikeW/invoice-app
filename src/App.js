@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./pages/home";
 import ViewInvoice from "./pages/viewInvoice";
 import CreateInvoice from "./pages/createInvoice";
+import EditInvoice from "./pages/editInvoice";
 
 const App = () => {
   return (
@@ -26,12 +27,10 @@ const App = () => {
           <Route exact path="/create-invoice">
             <CreateInvoice />
           </Route>
- {/*
-          <Route exact path="/edit-invoice">
+
+          <Route exact path="/edit-invoice/:invoiceId">
             <EditInvoice />
           </Route>
-
-          */}
         </Switch>
       </Router>
     </div>

@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import {Context} from "../context";
 import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
 import GoBackButton from "../components/buttons/GoBackButton";
@@ -9,7 +10,7 @@ import {ReactComponent as DeleteItem} from "../icons/icon-delete.svg";
 
 /* Für jedes nested-Object in state eine eigene handle-Funktion, weil sonst nicht darauf zugegriffen werden kann. */
 
-const initialInvoiceData = {
+const initialInvoiceTemplate = {
     id: "",
     createdAt: "",
     paymentDue: "",
@@ -40,14 +41,11 @@ const initialInvoiceData = {
     ],
     total: 0
 }
-const CreateInvoice = () => {  
-    const [invoiceData, setInvoiceData] = useState(initialInvoiceData);
-    const [total, setTotal] = useState(invoiceData.total);
+const CreateInvoice = () => {
+    const context = useContext(Context);  
+    const [invoice, setInvoice] = useState(initialInvoiceTemplate);
+    const [total, setTotal] = useState(invoice.total);
 
-    /*
-    const clearState = () => {
-        setInvoiceData({ ...initialInvoiceData });
-    }*/
     const addNewTotal = (quantity, price) => {
         let result = 0;
         result = quantity * price;
@@ -57,7 +55,7 @@ const CreateInvoice = () => {
     // Zustand wird mit den eingegebenen Werten aus den Inputs gefüllt.
     const handleChange = event => {
         const {name, value} = event.target;
-        setInvoiceData(prevInvoiceData => {
+        setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
                 [name]: value
@@ -65,12 +63,37 @@ const CreateInvoice = () => {
         })
     }
 
+
+    function formatDate(date) {
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    }
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(date.getDate() + days);
+        return result;
+    }
+
+    const setPaymentDue = event => {
+        const {createdAt} = {...invoice};
+        const paymentDueValue = formatDate(addDays(createdAt, 7));
+        setInvoice(prevInvoiceData => {
+            return {
+                ...prevInvoiceData,
+                paymentDue: paymentDueValue
+            }
+        })
+    }
+    console.log(invoice.paymentDue)
+
+    
+
     const handleChangeSenderAddress = event => {
-        const {senderAddress} = {...invoiceData};
+        const {senderAddress} = {...invoice};
         const currentSenderAddress = senderAddress;
         const {name, value} = event.target;
         currentSenderAddress[name] = value;
-        setInvoiceData(prevInvoiceData => {
+        setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
                 senderAddress: currentSenderAddress
@@ -79,11 +102,11 @@ const CreateInvoice = () => {
     }
 
     const handleChangeClientAddress = event => {
-        const {clientAddress} = {...invoiceData};
+        const {clientAddress} = {...invoice};
         const currentClientAddress = clientAddress;
         const {name, value} = event.target;
         currentClientAddress[name] = value;
-        setInvoiceData(prevInvoiceData => {
+        setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
                 clientAddress: currentClientAddress
@@ -92,17 +115,18 @@ const CreateInvoice = () => {
     }
 
     const handleChangeItems = event => {
-        const {items} = {...invoiceData};
+        const {items} = {...invoice};
         const currentItems = items;
         const {name, value} = event.target;
         currentItems[name] = value;
-        setInvoiceData(prevInvoiceData => {
+        setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
                 items: currentItems
             }
         })
     }
+
 
     /*
     const handleChangeItemsTotal = (quantity, price) => {
@@ -114,7 +138,6 @@ const CreateInvoice = () => {
     // Nach Klick auf den Button wird ein alert-Fenster geöffnet.
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(invoiceData)
         alert(`New Invoice was added.`);
     }
 
@@ -126,29 +149,29 @@ const CreateInvoice = () => {
             </div>
                 <FormContainer className="body2">
                     <h1>New Invoice</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <FormAllFieldsContainer>
                         <div>
                             <FieldsetTitle>Bill From</FieldsetTitle>
                             
                             <FormFieldContainer>
                                 <label>Street Address</label>
-                                <LongInputField type="text" name="street" value={invoiceData.senderAddress.street} onChange={handleChangeSenderAddress}/>
+                                <LongInputField type="text" name="street" value={invoice.senderAddress.street} onChange={handleChangeSenderAddress}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer >
                                 <div>
                                     <label className="cityLabel">City</label>
-                                    <ShortInputField className="cityInput" type="text" name="city" value={invoiceData.senderAddress.city} onChange={handleChangeSenderAddress}/>
+                                    <ShortInputField className="cityInput" type="text" name="city" value={invoice.senderAddress.city} onChange={handleChangeSenderAddress}/>
                                 
                                     <label className="postCodeLabel">Post Code</label>
-                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoiceData.senderAddress.postCode} onChange={handleChangeSenderAddress}/>
+                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.senderAddress.postCode} onChange={handleChangeSenderAddress}/>
                                 </div>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Country</label>
-                                <LongInputField type="text" name="country" value={invoiceData.senderAddress.country} onChange={handleChangeSenderAddress}/>
+                                <LongInputField type="text" name="country" value={invoice.senderAddress.country} onChange={handleChangeSenderAddress}/>
                             </FormFieldContainer>
                         </div>
 
@@ -156,52 +179,52 @@ const CreateInvoice = () => {
                             <FieldsetTitle>Bill To</FieldsetTitle>
                             <FormFieldContainer>
                                 <label>Client's Name</label>
-                                <LongInputField type="text" name="clientName" value={invoiceData.clientName} onChange={handleChange}/>
+                                <LongInputField type="text" name="clientName" value={invoice.clientName} onChange={handleChange}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Client's Email</label>
-                                <LongInputField type="email" name="clientEmail" value={invoiceData.clientEmail} onChange={handleChange}/>
+                                <LongInputField type="email" name="clientEmail" value={invoice.clientEmail} onChange={handleChange}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Street Address</label>
-                                <LongInputField type="text" name="street" value={invoiceData.clientAddress.street} onChange={handleChangeClientAddress}/>
+                                <LongInputField type="text" name="street" value={invoice.clientAddress.street} onChange={handleChangeClientAddress}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <div>
                                     <label className="cityLabel">City</label>
-                                    <ShortInputField className="cityInput" type="text" name="city" value={invoiceData.clientAddress.city} onChange={handleChangeClientAddress}/>
+                                    <ShortInputField className="cityInput" type="text" name="city" value={invoice.clientAddress.city} onChange={handleChangeClientAddress}/>
 
                                     <label className="postCodeLabel">Post Code</label>
-                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoiceData.clientAddress.postCode} onChange={handleChangeClientAddress}/>
+                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.clientAddress.postCode} onChange={handleChangeClientAddress}/>
                                 </div>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Country</label>
-                                <LongInputField type="text" name="country" value={invoiceData.clientAddress.country} onChange={handleChangeClientAddress}/>
+                                <LongInputField type="text" name="country" value={invoice.clientAddress.country} onChange={handleChangeClientAddress}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Invoice Date</label>
-                                <LongInputField type="date" name="createdAt" value={invoiceData.createdAt} onChange={handleChange}/>
+                                <LongInputField type="date" name="createdAt" value={invoice.createdAt} onChange={handleChange}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Payment Terms</label>
                                 <br />
-                                <select name="paymentTerms" value={invoiceData.paymentTerms} onChange={handleChange}>
-                                    <option value="1">Net 1 Day</option>
-                                    <option value="7">Net 7 Days</option>
-                                    <option value="30">Net 30 Days</option>
+                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange}>
+                                    <option value="1" onClick={setPaymentDue}>Net 1 Day</option>
+                                    <option value="7" onClick={setPaymentDue}>Net 7 Days</option>
+                                    <option value="30" onClick={setPaymentDue}>Net 30 Days</option>
                                 </select>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <label>Project Description</label>
-                                <LongInputField type="text" name="description" value={invoiceData.description} onChange={handleChange}/>
+                                <LongInputField type="text" name="description" value={invoice.description} onChange={handleChange}/>
                             </FormFieldContainer>
                         </div>
                         
@@ -209,16 +232,16 @@ const CreateInvoice = () => {
                             <h3>Item List</h3>
                             <FormFieldContainer>
                                 <label>Item Name</label>
-                                <LongInputField type="text" name="name" value={invoiceData.items.name} onChange={handleChangeItems}/>
+                                <LongInputField type="text" name="name" value={invoice.items.name} onChange={handleChangeItems}/>
                             </FormFieldContainer>
 
                             <FormFieldContainer>
                                 <div>
                                     <label className="quantityLabel">Qty.</label>
-                                    <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoiceData.items.quantity} onChange={handleChangeItems}/>
+                                    <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoice.items.quantity} onChange={handleChangeItems}/>
 
                                     <label className="priceLabel">Price</label>
-                                    <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoiceData.items.price} onChange={handleChangeItems} />
+                                    <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items.price} onChange={handleChangeItems} />
 
                                     <label className="itemTotalLabel">Total</label>
                                     <ItemTotalField className="itemTotalInput" name="total">{total}</ItemTotalField>
@@ -228,6 +251,10 @@ const CreateInvoice = () => {
                             </FormFieldContainer>
                         </div>
                         </FormAllFieldsContainer>
+                        <Link to="/">
+                            <button onClick={() => context.addNewInvoice(invoice)}>Add Invoice</button>
+                        </Link>
+                        
                     </form>
                 </FormContainer>
             <CreateInvoiceButtonCollection />
@@ -236,4 +263,3 @@ const CreateInvoice = () => {
 }
 
 export default CreateInvoice;
-// (invoiceData.items.quantity && invoiceData.items.price) === undefined ? "0" : handleChangeItemsTotal(invoiceData.items.quantity, invoiceData.items.price)
