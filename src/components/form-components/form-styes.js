@@ -43,18 +43,19 @@ export const ShortInputField = styled(LongInputField)`
 `
 export const QuantityInputField = styled(LongInputField)`
     width: 64px;
+    padding-right: 0;
 `
 
 export const PriceInputField = styled(LongInputField)`
     width: 100px;
 `
 
-export const ItemTotalField = styled.label`
-    margin-top: 28px;
+export const ItemTotalField = styled(LongInputField)`
     width: 60px;
     padding: 0;
     cursor: unset;
     color: #888EB0;
+    border: none; 
 `
 
 export const FormFieldContainer = styled.div`
@@ -103,6 +104,11 @@ export const FormFieldContainer = styled.div`
         .itemTotalInput {
             position: absolute;
             left: 196px;
+        }
+
+        .itemTotalInput:focus {
+            outline: none !important;
+            outline-offset: none !important;
         }
 
         .deleteItem {

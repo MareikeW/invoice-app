@@ -30,6 +30,8 @@ const ContextProvider = (props) => {
 
     // Füge eine neue Invoice ans Ende des Arrays im Zustand
     const addNewInvoice = newInvoice => {
+        newInvoice.status = "pending";
+        newInvoice.id = addNewId();
         setInvoiceData(prevInvoices => [...prevInvoices, newInvoice]);
     }
 

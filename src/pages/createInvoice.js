@@ -6,16 +6,15 @@ import GoBackButton from "../components/buttons/GoBackButton";
 import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
 import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
     QuantityInputField, PriceInputField, ItemTotalField, PageBody } from "../components/form-components/form-styes";
-import {ReactComponent as DeleteItem} from "../icons/icon-delete.svg";
 
 /* Für jedes nested-Object in state eine eigene handle-Funktion, weil sonst nicht darauf zugegriffen werden kann. */
 
 const initialInvoiceTemplate = {
     id: "",
-    createdAt: "",
+    createdAt: "2021-01-01",
     paymentDue: "",
     description: "",
-    paymentTerms: 0,
+    paymentTerms: 1,
     clientName: "", 
     clientEmail: "",
     status: "", 
@@ -44,13 +43,6 @@ const initialInvoiceTemplate = {
 const CreateInvoice = () => {
     const context = useContext(Context);  
     const [invoice, setInvoice] = useState(initialInvoiceTemplate);
-    const [total, setTotal] = useState(invoice.total);
-
-    const addNewTotal = (quantity, price) => {
-        let result = 0;
-        result = quantity * price;
-        setTotal(result)
-    }
 
     // Zustand wird mit den eingegebenen Werten aus den Inputs gefüllt.
     const handleChange = event => {
@@ -66,7 +58,6 @@ const CreateInvoice = () => {
     function addDays(createdAt, days) {
         if (!createdAt || !days) return null;
         const date = new Date(createdAt);
-        console.log("days: " +  days)
        
         date.setDate(date.getDate() + Number(days));
         return (
@@ -83,7 +74,7 @@ const CreateInvoice = () => {
             paymentDue: date
           }
         })
-      }, [invoice.paymentTerms])
+      }, [invoice.paymentTerms]);
 
     const handleChangeSenderAddress = event => {
         const {senderAddress} = {...invoice};
@@ -115,7 +106,15 @@ const CreateInvoice = () => {
         const {items} = {...invoice};
         const currentItems = items;
         const {name, value} = event.target;
-        currentItems[name] = value;
+        
+        currentItems[0][name] = value;
+        invoice.total = 0;
+
+        for (let i = 0; i < currentItems.length; i++) {
+            invoice.items[i].total = currentItems[i].quantity * currentItems[i].price;
+            invoice.total += currentItems[i].total;
+        }
+
         setInvoice(prevInvoiceData => {
             return {
                 ...prevInvoiceData,
@@ -124,19 +123,16 @@ const CreateInvoice = () => {
         })
     }
 
-
-    /*
-    const handleChangeItemsTotal = (quantity, price) => {
-            let result = 0;
-            result = quantity * price;
-            return result.toLocaleString("en-GB", {minimumFractionDigits: 2});
-    }*/
-
-    // Nach Klick auf den Button wird ein alert-Fenster geöffnet.
-    const handleSubmit = event => {
-        event.preventDefault();
-        alert(`New Invoice was added.`);
-    }
+    useEffect(() => {
+        setInvoice(prevInvoice => {
+            const total = prevInvoice.items.quantity * prevInvoice.items.price;
+            
+            return {
+                ...prevInvoice,
+                total: total
+            }
+        });
+      }, [invoice.items.price]);
 
     return (
         <PageBody>
@@ -176,7 +172,7 @@ const CreateInvoice = () => {
                             <FieldsetTitle>Bill To</FieldsetTitle>
                             <FormFieldContainer>
                                 <label>Client's Name</label>
-                                <LongInputField type="text" name="clientName" value={invoice.clientName} onChange={handleChange}/>
+                                <LongInputField type="text" name="clientName" value={invoice.clientName} onChange={handleChange} />
                             </FormFieldContainer>
 
                             <FormFieldContainer>
@@ -213,7 +209,7 @@ const CreateInvoice = () => {
                                 <label>Payment Terms</label>
                                 <br />
                                 <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange}>
-                                    <option value="1">Net 1 Day</option>
+                                    <option selected value="1">Net 1 Day</option>
                                     <option value="7">Net 7 Days</option>
                                     <option value="30">Net 30 Days</option>
                                 </select>
@@ -235,22 +231,22 @@ const CreateInvoice = () => {
                             <FormFieldContainer>
                                 <div>
                                     <label className="quantityLabel">Qty.</label>
-                                    <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoice.items.quantity} onChange={handleChangeItems}/>
+                                    <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoice.items.quantity} onChange={handleChangeItems} />
 
                                     <label className="priceLabel">Price</label>
                                     <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items.price} onChange={handleChangeItems} />
 
                                     <label className="itemTotalLabel">Total</label>
-                                    <ItemTotalField className="itemTotalInput" name="total">{total}</ItemTotalField>
-
-                                    <DeleteItem className="deleteItem" onClick={handleSubmit}></DeleteItem>
+                                    <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} onChange={handleChangeItems} readOnly />
                                 </div>
                             </FormFieldContainer>
                         </div>
                         </FormAllFieldsContainer>
-                        
                         <Link to="/">
                             <button onClick={() => context.addNewDraft(invoice)}>Save As Draft</button>
+                        </Link>
+                        <Link to="/">
+                            <button onClick={() => context.addNewInvoice(invoice)}>Save & Send</button>
                         </Link>
                     </form>
                 </FormContainer>

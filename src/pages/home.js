@@ -81,7 +81,6 @@ const Home = () => {
             :
                 filteredInvoices.map(invoice => {
                     return (
-                            <Link to={`/view-invoice/${invoice.id}`}>
                                 <InvoiceCard 
                                     key={invoice.id}
                                     id={invoice.id} 
@@ -90,7 +89,6 @@ const Home = () => {
                                     total={invoice.total}
                                     status={invoice.status}
                                 />
-                            </Link>
                     )
                 })
             }

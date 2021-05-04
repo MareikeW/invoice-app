@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const LinkContainer = styled.div`
     height: 134px;
-    background-color: #fff;
     border-radius: 8px;
     min-width: 327px;
     position: relative;
@@ -30,6 +29,10 @@ export const Container = styled.div`
     @media (min-width: 1024px) {
         width: 730px;
     }
+`
+
+export const Container = styled(LinkContainer)` 
+    background-color: #fff;
 `
 
 export const Id = styled.h4`
