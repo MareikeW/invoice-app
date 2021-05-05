@@ -5,7 +5,7 @@ import InvoiceInformation from "../components/invoice-full-view/InvoiceInformati
 import InvoiceTotalContainerHeadings from "../components/invoice-full-view/InvoiceTotalContainerHeadings";
 import Item from "../components/invoice-full-view/Item";
 import TotalPrice from "../components/invoice-full-view/TotalPrice";
-import {StyledMarkAsPaidBtn} from "../components/buttons/button-styles";
+import {StyledMarkAsPaidBtn, StyledEditBtn, StyledDeleteBtn} from "../components/buttons/button-styles";
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import {Context} from "../context";
@@ -39,11 +39,11 @@ const ViewInvoice = () => {
                 </StatusName>
                 <StatusButtons>
                     <Link to={`/edit-invoice/${thisInvoice.id}`}>
-                        <button>Edit</button>
+                        <StyledEditBtn>Edit</StyledEditBtn>
                     </Link> 
                     
                     <Link to="/">
-                        <button className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</button>
+                        <StyledDeleteBtn className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</StyledDeleteBtn>
                     </Link>
                     <Link to="/">
                         <StyledMarkAsPaidBtn value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</StyledMarkAsPaidBtn>
@@ -92,11 +92,11 @@ const ViewInvoice = () => {
 
             <div className="viewInvoiceButtonCollectionMobile">
                     <Link to={`/edit-invoice/${thisInvoice.id}`}>
-                    <button>Edit</button>
+                    <StyledEditBtn>Edit</StyledEditBtn>
                 </Link> 
         
                 <Link to="/">
-                    <button className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</button>
+                    <StyledDeleteBtn className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</StyledDeleteBtn>
                 </Link>
                 <Link to="/">
                     <StyledMarkAsPaidBtn value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</StyledMarkAsPaidBtn>

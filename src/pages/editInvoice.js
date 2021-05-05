@@ -4,15 +4,13 @@ import {useParams} from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
 import GoBackButton from "../components/buttons/GoBackButton";
-import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
 import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
-    QuantityInputField, PriceInputField, ItemTotalField, PageBody } from "../components/form-components/form-styes";
+    QuantityInputField, PriceInputField, ItemTotalField, PageBody, BillFromContainer, BillToContainer, FormDatePaymentTermsContainer, ItemListContainer } from "../components/form-components/form-styes";
+import {SaveChangesBtn, SaveChangesBtnContainer} from "../components/buttons/button-styles";
 
 
-
-const CreateInvoice = () => {
+const EditInvoice = () => {
     const {invoiceId} = useParams();
-
     const context = useContext(Context); 
     
     // Sucht nach der Rechnung, die bearbeitet werden soll
@@ -53,7 +51,7 @@ const CreateInvoice = () => {
       }, [invoice.paymentTerms]);
 
     const handleChangeSenderAddress = event => {
-        const {senderAddress} = {...invoice};
+        const {senderAddress} = invoice;
         const currentSenderAddress = senderAddress;
         const {name, value} = event.target;
         currentSenderAddress[name] = value;
@@ -66,7 +64,7 @@ const CreateInvoice = () => {
     }
 
     const handleChangeClientAddress = event => {
-        const {clientAddress} = {...invoice};
+        const {clientAddress} = invoice;
         const currentClientAddress = clientAddress;
         const {name, value} = event.target;
         currentClientAddress[name] = value;
@@ -79,7 +77,7 @@ const CreateInvoice = () => {
     }
 
     const handleChangeItems = event => {
-        const {items} = {...invoice};
+        const {items} = invoice;
         const currentItems = items;
         const {name, value} = event.target;
     
@@ -118,118 +116,120 @@ const CreateInvoice = () => {
                 <Link to="/"><GoBackButton /></Link>
             </div>
                 <FormContainer className="body2">
-                    <h1>New Invoice</h1>
+                    <h1>Edit #{invoice.id}</h1>
                     <form>
                         <FormAllFieldsContainer>
-                        <div>
-                            <FieldsetTitle>Bill From</FieldsetTitle>
-                            
-                            <FormFieldContainer>
-                                <label>Street Address</label>
-                                <LongInputField type="text" name="street" value={invoice.senderAddress.street} onChange={handleChangeSenderAddress}/>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer >
-                                <div>
-                                    <label className="cityLabel">City</label>
-                                    <ShortInputField className="cityInput" type="text" name="city" value={invoice.senderAddress.city} onChange={handleChangeSenderAddress}/>
+                            <BillFromContainer>
+                                <FieldsetTitle>Bill From</FieldsetTitle>
                                 
-                                    <label className="postCodeLabel">Post Code</label>
-                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.senderAddress.postCode} onChange={handleChangeSenderAddress}/>
-                                </div>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Country</label>
-                                <LongInputField type="text" name="country" value={invoice.senderAddress.country} onChange={handleChangeSenderAddress}/>
-                            </FormFieldContainer>
-                        </div>
-
-                        <div>
-                            <FieldsetTitle>Bill To</FieldsetTitle>
-                            <FormFieldContainer>
-                                <label>Client's Name</label>
-                                <LongInputField type="text" name="clientName" value={invoice.clientName} onChange={handleChange} />
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Client's Email</label>
-                                <LongInputField type="email" name="clientEmail" value={invoice.clientEmail} onChange={handleChange}/>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Street Address</label>
-                                <LongInputField type="text" name="street" value={invoice.clientAddress.street} onChange={handleChangeClientAddress}/>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <div>
-                                    <label className="cityLabel">City</label>
-                                    <ShortInputField className="cityInput" type="text" name="city" value={invoice.clientAddress.city} onChange={handleChangeClientAddress}/>
-
-                                    <label className="postCodeLabel">Post Code</label>
-                                    <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.clientAddress.postCode} onChange={handleChangeClientAddress}/>
-                                </div>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Country</label>
-                                <LongInputField type="text" name="country" value={invoice.clientAddress.country} onChange={handleChangeClientAddress}/>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Invoice Date</label>
-                                <LongInputField type="date" name="createdAt" value={invoice.createdAt} disabled/>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Payment Terms</label>
-                                <br />
-                                <select name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange} disabled >
-                                    <option value="1">Net 1 Day</option>
-                                    <option value="7">Net 7 Days</option>
-                                    <option value="30">Net 30 Days</option>
-                                </select>
-                            </FormFieldContainer>
-
-                            <FormFieldContainer>
-                                <label>Project Description</label>
-                                <LongInputField type="text" name="description" value={invoice.description} onChange={handleChange}/>
-                            </FormFieldContainer>
-                        </div>
-                        
-                        <div>
-                            <h3>Item List</h3>
                                 <FormFieldContainer>
-                                    <label>Item Name</label>
-                                    <LongInputField type="text" name="name" value={invoice.items[0].name} onChange={handleChangeItems}/>
+                                    <label>Street Address</label>
+                                    <LongInputField type="text" name="street" value={invoice.senderAddress.street} onChange={handleChangeSenderAddress}/>
                                 </FormFieldContainer>
 
                                 <FormFieldContainer>
                                     <div>
-                                        <label className="quantityLabel">Qty.</label>
-                                        <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoice.items[0].quantity} onChange={handleChangeItems} />
-
-                                        <label className="priceLabel">Price</label>
-                                        <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items[0].price} onChange={handleChangeItems} />
-
-                                        <label className="itemTotalLabel">Total</label>
-                                        <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} readOnly />
+                                        <label className="cityLabel">City</label>
+                                        <ShortInputField className="cityInput" type="text" name="city" value={invoice.senderAddress.city} onChange={handleChangeSenderAddress}/>
+                                    
+                                        <label className="postCodeLabel">Post Code</label>
+                                        <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.senderAddress.postCode} onChange={handleChangeSenderAddress}/>
                                     </div>
-                                </FormFieldContainer> 
-                        </div>
+                                </FormFieldContainer>
+
+                                <FormFieldContainer>
+                                    <label className="countryLabel">Country</label>
+                                    <LongInputField className="countryInput" type="text" name="country" value={invoice.senderAddress.country} onChange={handleChangeSenderAddress}/>
+                                </FormFieldContainer>
+                            </BillFromContainer>
+
+                            <BillToContainer>
+                                <FieldsetTitle>Bill To</FieldsetTitle>
+                                <FormFieldContainer>
+                                    <label>Client's Name</label>
+                                    <LongInputField type="text" name="clientName" value={invoice.clientName} onChange={handleChange} />
+                                </FormFieldContainer>
+
+                                <FormFieldContainer>
+                                    <label>Client's Email</label>
+                                    <LongInputField type="email" name="clientEmail" value={invoice.clientEmail} onChange={handleChange}/>
+                                </FormFieldContainer>
+
+                                <FormFieldContainer>
+                                    <label>Street Address</label>
+                                    <LongInputField type="text" name="street" value={invoice.clientAddress.street} onChange={handleChangeClientAddress}/>
+                                </FormFieldContainer>
+
+                                <FormFieldContainer>
+                                    <div>
+                                        <label className="cityLabel">City</label>
+                                        <ShortInputField className="cityInput" type="text" name="city" value={invoice.clientAddress.city} onChange={handleChangeClientAddress}/>
+
+                                        <label className="postCodeLabel">Post Code</label>
+                                        <ShortInputField className="postCodeInput" type="text" name="postCode" value={invoice.clientAddress.postCode} onChange={handleChangeClientAddress}/>
+                                    </div>
+                                </FormFieldContainer>
+
+                                <FormFieldContainer>
+                                    <label className="countryLabel">Country</label>
+                                    <LongInputField className="countryInput" type="text" name="country" value={invoice.clientAddress.country} onChange={handleChangeClientAddress}/>
+                                </FormFieldContainer>
+
+                                <FormDatePaymentTermsContainer>
+                                    <FormFieldContainer>
+                                        <label className="invoiceDateLabel">Invoice Date</label>
+                                        <LongInputField className="invoiceDateInput" type="date" name="createdAt" value={invoice.createdAt} disabled/>
+                                    </FormFieldContainer>
+
+                                    <FormFieldContainer>
+                                        <label className="paymentTermsLabel">Payment Terms</label>
+                                        <br />
+                                        <select className="paymentTermsSelect" name="paymentTerms" value={invoice.paymentTerms} onChange={handleChange}>
+                                            <option value="1">Net 1 Day</option>
+                                            <option value="7">Net 7 Days</option>
+                                            <option value="30">Net 30 Days</option>
+                                        </select>
+                                    </FormFieldContainer>
+                                </FormDatePaymentTermsContainer>
+
+                                <FormFieldContainer>
+                                    <label>Project Description</label>
+                                    <LongInputField type="text" name="description" value={invoice.description} onChange={handleChange}/>
+                                </FormFieldContainer>
+                            </BillToContainer>
+                            
+                            <ItemListContainer>
+                                <h3>Item List</h3>
+                                    <FormFieldContainer>
+                                        <label className="itemInputLabel">Item Name</label>
+                                        <LongInputField className="itemNameInput" type="text" name="name" value={invoice.items[0].name} onChange={handleChangeItems}/>
+                                    </FormFieldContainer>
+
+                                    <FormFieldContainer>
+                                        <div className="itemInfo">
+                                            <label className="quantityLabel">Qty.</label>
+                                            <QuantityInputField className="quantityInput" type="number" min="0" name="quantity" value={invoice.items[0].quantity} onChange={handleChangeItems} />
+
+                                            <label className="priceLabel">Price</label>
+                                            <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items[0].price} onChange={handleChangeItems} />
+
+                                            <label className="itemTotalLabel">Total</label>
+                                            <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} readOnly />
+                                        </div>
+                                    </FormFieldContainer> 
+                            </ItemListContainer>
                         </FormAllFieldsContainer>
                         
-                        <Link to="/">
-                            <button onClick={() => context.editInvoice(invoice)}>Save Changes</button>
-                        </Link>
-                        
+                        <SaveChangesBtnContainer>
+                            <Link to="/">
+                                <SaveChangesBtn onClick={() => context.editInvoice(invoice)}>Save Changes</SaveChangesBtn>
+                            </Link>
+                        </SaveChangesBtnContainer>
                     </form>
                 </FormContainer>
-                
-            <CreateInvoiceButtonCollection />
+
         </PageBody>
     )
 }
 
-export default CreateInvoice;
+export default EditInvoice;

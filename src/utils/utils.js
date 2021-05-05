@@ -13,3 +13,5 @@ export function toReformattedDate(date) {
 export function toCurrencyFormat(total) {
     return total.toLocaleString("en-GB", {minimumFractionDigits: 2});
 }
+
+

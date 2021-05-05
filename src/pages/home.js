@@ -1,5 +1,4 @@
 import React, {useState, useContext} from "react";
-//import Menu from "../components/menu/Menu";
 import InvoiceCard from "../components/invoice-card/InvoiceCard";
 import MenuInvoiceAmount from "../components/menu/MenuInvoiceAmount";
 import FilterButton from "../components/menu/FilterButton";

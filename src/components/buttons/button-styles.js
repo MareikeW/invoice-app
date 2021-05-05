@@ -34,6 +34,10 @@ export const StyledEditBtn = styled.button`
     }
 `
 
+export const StyledDiscardBtn = styled(StyledEditBtn)`
+    width: 84px;
+`
+
 export const StyledDeleteBtn = styled.button`
     width: 89px;
     background-color: #EC5757;
@@ -42,6 +46,12 @@ export const StyledDeleteBtn = styled.button`
     &:hover {
         background-color: #FF9797;
     }
+`
+
+export const StyledDraftBtn = styled.button`
+    width: 117px;
+    background-color: #373B53;
+    color: #888EB0;
 `
 
 export const StyledMarkAsPaidBtn = styled.button`
@@ -54,20 +64,38 @@ export const StyledMarkAsPaidBtn = styled.button`
     }
 `
 
-export const StyledDiscardBtn = styled.button`
-    width: 84px;
-    background-color: #F9FAFE;
-    color: #7E88C3;
-`
-
-export const StyledDraftBtn = styled.button`
-    width: 117px;
-    background-color: #373B53;
-    color: #888EB0;
-`
-
-export const StyledSaveSendBtn = styled.button`
+export const StyledSaveSendBtn = styled(StyledMarkAsPaidBtn)`
     width: 112px;
-    background-color: #7C5DFA;
-    color: #FFFFFF;
+`
+
+export const SaveChangesBtn = styled(StyledMarkAsPaidBtn)`
+    width: 138px;
+`
+
+export const SaveChangesBtnContainer = styled.div`
+    text-align: right;
+    margin: 24px;
+    margin-bottom: 0;
+    padding-bottom: 24px;
+    width: 327px;
+
+    @media (min-width: 720px) {
+        margin: 0;
+        width: 502px;
+    }
+`
+
+export const DiscardDraftSaveContainer = styled(SaveChangesBtnContainer)`
+    text-align: unset;
+    display: flex;
+    justify-content: space-between;
+
+    @media (min-width: 720px) {
+        position: relative;
+
+        .saveAsDraft {
+            position: absolute;
+            right: 120px;
+        }
+    } 
 `
