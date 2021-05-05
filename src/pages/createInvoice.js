@@ -3,46 +3,15 @@ import {Context} from "../context";
 import { Link } from "react-router-dom";
 import Header from "../components/shared/Header";
 import GoBackButton from "../components/buttons/GoBackButton";
-import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
 import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
     QuantityInputField, PriceInputField, ItemTotalField, PageBody } from "../components/form-components/form-styes";
+import {emptyInvoiceTemplate} from "../utils/emptyInvoiceTemplate";
 
 /* Für jedes nested-Object in state eine eigene handle-Funktion, weil sonst nicht darauf zugegriffen werden kann. */
 
-const initialInvoiceTemplate = {
-    id: "",
-    createdAt: "2021-01-01",
-    paymentDue: "",
-    description: "",
-    paymentTerms: 1,
-    clientName: "", 
-    clientEmail: "",
-    status: "", 
-    senderAddress: { 
-        street: "",
-        city: "",
-        postCode: "",
-        country: ""
-    },
-    clientAddress: { 
-        street: "",
-        city: "",
-        postCode: "",
-        country: ""
-    },
-    items: [
-        {
-        name: "",
-        quantity: 0,
-        price: 0,
-        total: 0
-        }
-    ],
-    total: 0
-}
 const CreateInvoice = () => {
     const context = useContext(Context);  
-    const [invoice, setInvoice] = useState(initialInvoiceTemplate);
+    const [invoice, setInvoice] = useState(emptyInvoiceTemplate);
 
     // Zustand wird mit den eingegebenen Werten aus den Inputs gefüllt.
     const handleChange = event => {
@@ -55,7 +24,7 @@ const CreateInvoice = () => {
         })
     }
 
-    function addDays(createdAt, days) {
+    const addDays = (createdAt, days) => {
         if (!createdAt || !days) return null;
         const date = new Date(createdAt);
        
@@ -77,7 +46,7 @@ const CreateInvoice = () => {
       }, [invoice.paymentTerms]);
 
     const handleChangeSenderAddress = event => {
-        const {senderAddress} = {...invoice};
+        const {senderAddress} = invoice;
         const currentSenderAddress = senderAddress;
         const {name, value} = event.target;
         currentSenderAddress[name] = value;
@@ -90,7 +59,7 @@ const CreateInvoice = () => {
     }
 
     const handleChangeClientAddress = event => {
-        const {clientAddress} = {...invoice};
+        const {clientAddress} = invoice;
         const currentClientAddress = clientAddress;
         const {name, value} = event.target;
         currentClientAddress[name] = value;
@@ -103,7 +72,7 @@ const CreateInvoice = () => {
     }
 
     const handleChangeItems = event => {
-        const {items} = {...invoice};
+        const {items} = invoice;
         const currentItems = items;
         const {name, value} = event.target;
         
@@ -125,7 +94,7 @@ const CreateInvoice = () => {
 
     useEffect(() => {
         setInvoice(prevInvoice => {
-            const total = prevInvoice.items.quantity * prevInvoice.items.price;
+            const total = prevInvoice.items[0].quantity * prevInvoice.items[0].price;
             
             return {
                 ...prevInvoice,
@@ -237,11 +206,12 @@ const CreateInvoice = () => {
                                     <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items.price} onChange={handleChangeItems} />
 
                                     <label className="itemTotalLabel">Total</label>
-                                    <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} onChange={handleChangeItems} readOnly />
+                                    <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} readOnly />
                                 </div>
                             </FormFieldContainer>
                         </div>
                         </FormAllFieldsContainer>
+                        <button onClick={() => setInvoice(emptyInvoiceTemplate)}>Discard</button>
                         <Link to="/">
                             <button onClick={() => context.addNewDraft(invoice)}>Save As Draft</button>
                         </Link>
@@ -250,8 +220,6 @@ const CreateInvoice = () => {
                         </Link>
                     </form>
                 </FormContainer>
-                
-            <CreateInvoiceButtonCollection />
         </PageBody>
     )
 }

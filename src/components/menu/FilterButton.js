@@ -4,25 +4,26 @@ import {StyledFilterButton} from "../menu/menu-styles";
 
 const FilterButton = () => {
 
-    const filterOptions = document.getElementById("filterOptions");
-    const toggleFilterButton = (event) => {
-        event.preventDefault();
-        if (filterOptions.style.visibility === "visible") {
-            filterOptions.style.visibility = "hidden";
-        } else {
-            filterOptions.style.visibility = "visible";
-        }  
+    const toggleFilterOptions = (event) => {
+        if (document.getElementById("filterOptions")) {
+            event.preventDefault();
+            if (document.getElementById("filterOptions").style.visibility === "visible") {
+                document.getElementById("filterOptions").style.visibility = "hidden";
+            } else {
+                document.getElementById("filterOptions").style.visibility = "visible";
+            }  
+        }
     }
 
     return (
         <div>
             <div className="mobileVersion">
-                <StyledFilterButton onClick={toggleFilterButton}>Filter
+                <StyledFilterButton onClick={toggleFilterOptions}>Filter
                     <Arrow />
                 </StyledFilterButton>
             </div>
             <div className="tabletVersion">
-                <StyledFilterButton onClick={toggleFilterButton}>Filter by status
+                <StyledFilterButton onClick={toggleFilterOptions}>Filter by status
                     <Arrow />
                 </StyledFilterButton>
             </div>

@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import GoBackButton from "../components/buttons/GoBackButton";
-import EditButton from "../components/buttons/EditButton";
-import DeleteButton from "../components/buttons/DeleteButton";
 import IdDescriptionSenderAddress from "../components/invoice-full-view/IdDescriptionSenderAddress.js";
 import InvoiceInformation from "../components/invoice-full-view/InvoiceInformation";
 import InvoiceTotalContainerHeadings from "../components/invoice-full-view/InvoiceTotalContainerHeadings";
@@ -22,11 +20,6 @@ const ViewInvoice = () => {
 
     // Sucht nach der Rechnung, die angezeigt werden soll
     const thisInvoice = context.invoices.find(invoice => invoice.id === invoiceId);
-    const [status, setStatus] = useState(thisInvoice.status);
-
-    const setStatusToPaid = event => {
-        setStatus(event.target.value)
-    }
 
     return (
         <ViewInvoicePageContainer>
@@ -34,26 +27,26 @@ const ViewInvoice = () => {
             <Link to="/"><GoBackButton /></Link>
             <StatusContainer className="statusMobileVersion">
                 <StatusWord>Status</StatusWord>
-                <StatusName status={status}>
-                    <StatusDot status={status} />{status}
+                <StatusName status={thisInvoice.status}>
+                    <StatusDot status={thisInvoice.status} />{thisInvoice.status}
                 </StatusName>
             </StatusContainer>
 
             <StatusContainer className="statusTabletVersion">
                 <StatusWord>Status</StatusWord>
-                <StatusName status={status}>
-                    <StatusDot status={status} />{status}
+                <StatusName status={thisInvoice.status}>
+                    <StatusDot status={thisInvoice.status} />{thisInvoice.status}
                 </StatusName>
                 <StatusButtons>
                     <Link to={`/edit-invoice/${thisInvoice.id}`}>
-                        <EditButton className="editButton" />
+                        <button>Edit</button>
                     </Link> 
                     
                     <Link to="/">
                         <button className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</button>
                     </Link>
                     <Link to="/">
-                        <button value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</button>
+                        <StyledMarkAsPaidBtn value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</StyledMarkAsPaidBtn>
                     </Link>
                 </StatusButtons>
             </StatusContainer>
@@ -98,9 +91,16 @@ const ViewInvoice = () => {
             </InvoiceViewContainer>
 
             <div className="viewInvoiceButtonCollectionMobile">
-               <EditButton />
-               <DeleteButton />
-               <StyledMarkAsPaidBtn value="paid" onClick={setStatusToPaid}>Mark as Paid</StyledMarkAsPaidBtn>
+                    <Link to={`/edit-invoice/${thisInvoice.id}`}>
+                    <button>Edit</button>
+                </Link> 
+        
+                <Link to="/">
+                    <button className="deleteButton" onClick={() => context.clearInvoiceData(thisInvoice.id)}>Delete</button>
+                </Link>
+                <Link to="/">
+                    <StyledMarkAsPaidBtn value="paid" onClick={() => context.setStatusToPaid(thisInvoice.id)}>Mark as Paid</StyledMarkAsPaidBtn>
+                </Link>
             </div>
         </ViewInvoicePageContainer>
     )

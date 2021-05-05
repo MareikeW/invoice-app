@@ -110,12 +110,5 @@ export const FormFieldContainer = styled.div`
             outline: none !important;
             outline-offset: none !important;
         }
-
-        .deleteItem {
-            position: absolute;
-            right: 5px;
-            bottom: 16px;
-            cursor: pointer;
-        }
     }
 `

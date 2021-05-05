@@ -7,7 +7,7 @@ import GoBackButton from "../components/buttons/GoBackButton";
 import CreateInvoiceButtonCollection from "../components/button-collections/CreateInvoiceButtonCollection";
 import { FormContainer, FieldsetTitle, LongInputField, ShortInputField, FormFieldContainer, FormAllFieldsContainer,
     QuantityInputField, PriceInputField, ItemTotalField, PageBody } from "../components/form-components/form-styes";
-import {ReactComponent as DeleteItem} from "../icons/icon-delete.svg";
+
 
 
 const CreateInvoice = () => {
@@ -101,7 +101,8 @@ const CreateInvoice = () => {
 
     useEffect(() => {
         setInvoice(prevInvoice => {
-            const total = prevInvoice.items.quantity * prevInvoice.items.price;
+            // es gibt nur ein nested Array, deshalb [0]
+            const total = prevInvoice.items[0].quantity * prevInvoice.items[0].price;
             
             return {
                 ...prevInvoice,
@@ -213,7 +214,7 @@ const CreateInvoice = () => {
                                         <PriceInputField className="priceInput" type="number" min="0.00" name="price" value={invoice.items[0].price} onChange={handleChangeItems} />
 
                                         <label className="itemTotalLabel">Total</label>
-                                        <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} onChange={handleChangeItems} readOnly />
+                                        <ItemTotalField className="itemTotalInput" name="total" type="number" value={invoice.items[0].total} readOnly />
                                     </div>
                                 </FormFieldContainer> 
                         </div>
