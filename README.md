@@ -1,6 +1,6 @@
 # Frontend Mentor - Invoice app
 
-![Design preview for the Invoice app coding challenge](./preview.jpg)
+<h1>Link zur App: https://invoiceapp1.netlify.app/<(h1>
 
 ## Welcome! 👋
 
