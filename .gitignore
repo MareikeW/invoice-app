@@ -16,4 +16,5 @@
 .prettierignore
 
 # Ignore all Node Modules otherwise hundreds of json-files turn up in the cache and will be included in source control
-**node_modules
+"**node_modules"
+node_modules
