@@ -1,6 +1,6 @@
 # Frontend Mentor - Invoice app
 
-<h1>Link zur App: https://invoiceapp1.netlify.app/<(h1>
+<h2>Link zur App: https://invoiceapp1.netlify.app/</h2>
 
 ## Welcome! 👋
 
