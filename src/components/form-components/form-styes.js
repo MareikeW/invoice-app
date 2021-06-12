@@ -46,7 +46,7 @@ export const FormAllFieldsContainer = styled.div`
     }
 `
 
-export const BillFromContainer = styled.div`
+export const StyledBillFromContainer = styled.div`
     @media (min-width: 720px) {
         position: relative;
 
@@ -65,7 +65,7 @@ export const BillFromContainer = styled.div`
     }
 `
 
-export const BillToContainer = styled(BillFromContainer)`
+export const StyledBillToContainer = styled(StyledBillFromContainer)`
     @media (min-width: 720px) {
         .countryInput {
             top: 350px;
@@ -77,7 +77,7 @@ export const BillToContainer = styled(BillFromContainer)`
     }
 `
 
-export const FormDatePaymentTermsContainer = styled(BillFromContainer)`
+export const FormDatePaymentTermsContainer = styled(StyledBillFromContainer)`
     @media (min-width: 720px) {
         height: 73px; 
 
@@ -105,7 +105,7 @@ export const FormDatePaymentTermsContainer = styled(BillFromContainer)`
     }
 `
 
-export const ItemListContainer = styled(BillFromContainer)`
+export const ItemListContainer = styled(StyledBillFromContainer)`
     @media (min-width: 720px) {
         height: 211px;
         width: 504px;
@@ -139,7 +139,7 @@ export const FieldsetTitle = styled.p`
         margin-top: 48px;
     }
 `
-export const LongInputField = styled.input`
+export const StyledLongInputField = styled.input`
     width: 327px;
     margin-top: 10px;
 
@@ -148,20 +148,20 @@ export const LongInputField = styled.input`
     }
 `
 
-export const ShortInputField = styled(LongInputField)`
+export const StyledShortInputField = styled(StyledLongInputField)`
     width: 152px;
 `
 
-export const QuantityInputField = styled(LongInputField)`
+export const StyledQuantityInputField = styled(StyledLongInputField)`
     width: 64px;
     padding-right: 0;
 `
 
-export const PriceInputField = styled(LongInputField)`
+export const PriceInputField = styled(StyledLongInputField)`
     width: 100px;
 `
 
-export const ItemTotalField = styled(LongInputField)`
+export const ItemTotalField = styled(StyledLongInputField)`
     width: 60px;
     padding: 0;
     cursor: unset;
